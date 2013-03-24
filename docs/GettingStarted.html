@@ -1,31 +1,25 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Getting Started with Akiban Persistit &mdash; Persistit 3.2.2 documentation</title>
-    
+    <title>Getting Started with Akiban Persistit &mdash; Persistit v3.2.7 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '3.2.2',
-        COLLAPSE_INDEX: false,
+        URL_ROOT:    '#',
+        VERSION:     '3.2.7',
+        COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Persistit 3.2.2 documentation" href="index.html" />
+    <link rel="top" title="Persistit v3.2.7 documentation" href="index.html" />
     <link rel="next" title="Basic API" href="BasicAPI.html" />
     <link rel="prev" title="Akiban Persistit User Guide" href="index.html" /> 
   </head>
@@ -39,7 +33,7 @@
         <li class="right" >
           <a href="index.html" title="Akiban Persistit User Guide"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Persistit 3.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -64,19 +58,19 @@
 <p>This chapter briefly and informally introduces and demonstrates various Persistit features through examples. Subsequent chapters and the Javadoc API documentation provides a detailed reference guide to the product.</p>
 <div class="section" id="download-and-install">
 <h2>Download and Install<a class="headerlink" href="#download-and-install" title="Permalink to this headline">¶</a></h2>
-<p>Download <tt class="docutils literal"><span class="pre">akiban-persistit-3.2.2.zip</span></tt> from the <a class="reference external" href="https://launchpad.net/akiban-persistit/+download">Launchpad project</a> or directly from <a class="reference external" href="http://www.akiban.com/akiban-persistit">akiban.com</a>.</p>
-<p>Unpack the distribution kit into a convenient directory using any unzip utility. For example, use <tt class="docutils literal"><span class="pre">jar</span> <span class="pre">-xvf</span> <span class="pre">akiban-persistit-3.2.2.zip</span></tt> to unpack the distribution kit into the current working directory.</p>
+<p>Download <tt class="docutils literal"><span class="pre">akiban-persistit-3.2.7.zip</span></tt> from the <a class="reference external" href="https://launchpad.net/akiban-persistit/+download">Launchpad project</a> or directly from <a class="reference external" href="http://www.akiban.com/akiban-persistit">akiban.com</a>.</p>
+<p>Unpack the distribution kit into a convenient directory using any unzip utility. For example, use <tt class="docutils literal"><span class="pre">jar</span> <span class="pre">-xvf</span> <span class="pre">akiban-persistit-3.2.7.zip</span></tt> to unpack the distribution kit into the current working directory.</p>
 <p>Review the <tt class="docutils literal"><span class="pre">LICENSE.txt</span></tt> file located in the root of the installation directory. Persistit is licensed under the Eclipse Public License or a free-use community license, see our <a class="reference external" href="http://www.akiban.com/akiban-licensing-options">licensing options</a> for more details. By installing, copying or otherwise using the Software contained in the distribution kit, you agree to be bound by the terms of the license agreement. If you do not agree to these terms, remove and destroy all copies of the software in your possession immediately.</p>
 </div>
 <div class="section" id="working-with-persistit">
 <h2>Working with Persistit<a class="headerlink" href="#working-with-persistit" title="Permalink to this headline">¶</a></h2>
-<p>Add the <tt class="docutils literal"><span class="pre">akiban-persistit-3.2.2.jar</span></tt>, is found in the root directory of the distribution kit, to your project&#8217;s classpath. For example, copy it to <tt class="docutils literal"><span class="pre">jre/lib/ext</span></tt> in your Java Runtime Environment, or add it to your classpath environment variable.</p>
+<p>Add the <tt class="docutils literal"><span class="pre">akiban-persistit-3.2.7.jar</span></tt>, is found in the root directory of the distribution kit, to your project&#8217;s classpath. For example, copy it to <tt class="docutils literal"><span class="pre">jre/lib/ext</span></tt> in your Java Runtime Environment, or add it to your classpath environment variable.</p>
 <p>That&#8217;s it. You are ready to work with Persistit.</p>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <p>Review the <tt class="docutils literal"><span class="pre">examples</span></tt> directory. Here you will find functional examples of varying complexity.</p>
 <blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">examples/HelloWorld</span></tt></dt>
 <dd>source code for the example illustrating this chapter</dd>
 <dt><tt class="docutils literal"><span class="pre">examples/SimpleDemo</span></tt></dt>
@@ -92,7 +86,7 @@
 <dt><tt class="docutils literal"><span class="pre">examples/SpringFrameworkExample</span></tt></dt>
 <dd>configures and initializes a Persistit instance through Spring Framework</dd>
 </dl>
-</div></blockquote>
+</blockquote>
 </div>
 </div>
 <div class="section" id="helloworld">
@@ -161,14 +155,14 @@
 <p>Although <tt class="docutils literal"><span class="pre">HelloWorld.java</span></tt> is not very useful, it demonstrates several of the basic building blocks of the Persistit API.</p>
 <div class="section" id="initialization-and-configuration">
 <h3>Initialization and Configuration<a class="headerlink" href="#initialization-and-configuration" title="Permalink to this headline">¶</a></h3>
-<p>Before accessing any data, <tt class="docutils literal"><span class="pre">HelloWorld.java</span></tt> calls the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#initialize()">initialize()</a>. This sets up the memory configuration for buffers and the path names of Persistit volume and journal files. Alternative methods accept configuration information from a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html">com.persistit.Configuration</a> object, a <tt class="docutils literal"><span class="pre">java.util.Properties</span></tt> object, a specified properties file, or by default from the file named <tt class="docutils literal"><span class="pre">persistit.properties</span></tt> in the current working directory.</p>
+<p>Before accessing any data, <tt class="docutils literal"><span class="pre">HelloWorld.java</span></tt> calls the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#initialize()">initialize</a> method. This sets up the memory configuration for buffers and the path names of Persistit volume and journal files. Alternative methods accept configuration information from a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html">com.persistit.Configuration</a> object, a <tt class="docutils literal"><span class="pre">java.util.Properties</span></tt> object, a specified properties file, or by default from the file named <tt class="docutils literal"><span class="pre">persistit.properties</span></tt> in the current working directory.</p>
 <p>In this example, <tt class="docutils literal"><span class="pre">persistit.properties</span></tt> looks like this:</p>
 <div class="highlight-python"><pre>datapath=.
 buffer.count.8192=32
 volume.1=${datapath}/hwdemo,create,pageSize:8192,initialPages:5,extensionPages:5,maximumPages:100000
 journalpath=${datapath}/hwdemo_journal</pre>
 </div>
-<p>See <a class="reference internal" href="Configuration.html#configuration"><em>Configuration</em></a> for additional information about Persistit configuration properties.</p>
+<p>See <a class="reference external" href="Configuration.html#configuration"><em>Configuration</em></a> for additional information about Persistit configuration properties.</p>
 </div>
 <div class="section" id="volumes-and-trees">
 <h3>Volumes and Trees<a class="headerlink" href="#volumes-and-trees" title="Permalink to this headline">¶</a></h3>
@@ -185,14 +179,14 @@ journalpath=${datapath}/hwdemo_journal</pre>
 </pre></div>
 </div>
 <p>in <tt class="docutils literal"><span class="pre">HelloWorld.java</span></tt> finds a volume named &#8220;hwdemo&#8221; and attempts to find a tree in it named &#8220;greetings&#8221;. If there is no such tree, <tt class="docutils literal"><span class="pre">getExchange</span></tt> creates it.</p>
-<p>Methods <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#getExchange(com.persistit.Volume,%20java.lang.String,%20boolean)">getExchange(Volume, String, boolean)</a> and <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#releaseExchange(com.persistit.Exchange)">releaseExchange(Exchange)</a> maintain a pool of reusable Exchange objects designed for use by multi-threaded applications such as web applications. If a suitable exchange already exists, <tt class="docutils literal"><span class="pre">getExchange</span></tt> returns it; otherwise it constructs a new one.</p>
+<p>Methods <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#getExchange(com.persistit.Volume,%20java.lang.String,%20boolean)">getExchange</a> and <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#releaseExchange(com.persistit.Exchange)">releaseExchange</a> maintain a pool of reusable Exchange objects designed for use by multi-threaded applications such as web applications. If a suitable exchange already exists, <tt class="docutils literal"><span class="pre">getExchange</span></tt> returns it; otherwise it constructs a new one.</p>
 <p>The Exchange looks up the volume name “hwdemo” by matching it against the volumes specified in the configuration. The match is based on the simple file name of the volume after removing its final dotted suffix.  For example, the volume name “hwdemo” matches the volume specification <tt class="docutils literal"><span class="pre">${datapath}/hwdemo.v00</span></tt>.</p>
 <p>Each Exchange is implicitly associated with a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Key.html">com.persistit.Key</a> and a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Value.html">com.persistit.Value</a>. Typically you work with an Exchange in one of the following patterns:</p>
 <ul class="simple">
-<li>Modify the Key, modify the Value and then perform a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#store()">store()</a> operation.</li>
-<li>Modify the Key, perform a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#fetch()">fetch()</a> operation and then read the Value.</li>
-<li>Modify the Key and then perform a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#remove()">remove()</a> operation.</li>
-<li>Optionally modify the Key, perform a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#next()">next()</a>, <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#previous()">previous()</a> or <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#traverse(com.persistit.Key.Direction,%20boolean)">traverse(Key.Direction, boolean)</a> operation, then read the resulting Key and/or Value.</li>
+<li>Modify the Key, modify the Value and then perform a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#store()">store</a> operation.</li>
+<li>Modify the Key, perform a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#fetch()">fetch</a> operation and then read the Value.</li>
+<li>Modify the Key and then perform a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#remove()">remove</a> operation.</li>
+<li>Optionally modify the Key, perform a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#next()">next</a>, <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#previous()">previous</a> or <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#traverse(com.persistit.Key.Direction,%20boolean)">traverse</a> operation, then read the resulting Key and/or Value.</li>
 </ul>
 <p>These methods and their variants provide the foundation for using Persistit.</p>
 <div class="section" id="records">
@@ -237,8 +231,8 @@ journalpath=${datapath}/hwdemo_journal</pre>
 </div>
 <div class="section" id="closing-persistit">
 <h3>Closing Persistit<a class="headerlink" href="#closing-persistit" title="Permalink to this headline">¶</a></h3>
-<p>Persistit creates one or more background threads that lazily write data to the Volume files and perform other maintenance activities. Be sure to invoke the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()">close()</a> method to allow these threads to finish their work and exit properly. The pattern illustrated in <tt class="docutils literal"><span class="pre">HelloWorld.java</span></tt>, using a <em>try/finally</em> block to invoke <tt class="docutils literal"><span class="pre">close</span></tt>, is strongly recommended.</p>
-<p>The <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()">close()</a> method optionally flushes all data to disk from the buffer pool before shutting down. Specifying the <tt class="docutils literal"><span class="pre">false</span></tt> option will close Persistit more quickly will lose recent updates if they were not performed inside of transactions, or will potentially require a longer recovery process during the next startup to reapply committed transactions.</p>
+<p>Persistit creates one or more background threads that lazily write data to the Volume files and perform other maintenance activities. Be sure to invoke the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()">close</a> method to allow these threads to finish their work and exit properly. The pattern illustrated in <tt class="docutils literal"><span class="pre">HelloWorld.java</span></tt>, using a <em>try/finally</em> block to invoke <tt class="docutils literal"><span class="pre">close</span></tt>, is strongly recommended.</p>
+<p>The <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()">close</a> method optionally flushes all data to disk from the buffer pool before shutting down. Specifying the <tt class="docutils literal"><span class="pre">false</span></tt> option will close Persistit more quickly will lose recent updates if they were not performed inside of transactions, or will potentially require a longer recovery process during the next startup to reapply committed transactions.</p>
 </div>
 </div>
 <div class="section" id="additional-topics">
@@ -246,16 +240,17 @@ journalpath=${datapath}/hwdemo_journal</pre>
 <div class="section" id="persistitmap">
 <h3>PersistitMap<a class="headerlink" href="#persistitmap" title="Permalink to this headline">¶</a></h3>
 <p>A particularly easy way to get started with Persistit is to use its built-in <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/PersistitMap.html">com.persistit.PersistitMap</a> implementation. PersistitMap implements the <tt class="docutils literal"><span class="pre">java.util.SortedMap</span></tt> interface, so it can directly replace <tt class="docutils literal"><span class="pre">java.util.TreeMap</span></tt> or other kinds of Map in existing Java code.</p>
-<p>See <a class="reference internal" href="BasicAPI.html#persistitmap"><em>PersistitMap</em></a>.</p>
+<p>See <a class="reference external" href="BasicAPI.html#persistitmap"><em>PersistitMap</em></a>.</p>
 </div>
 <div class="section" id="keyfilters">
 <h3>KeyFilters<a class="headerlink" href="#keyfilters" title="Permalink to this headline">¶</a></h3>
-<p>A <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/KeyFilter.html">com.persistit.KeyFilter</a> can be supplied to restrict the results traversal operation in a convenient and</p>
+<p>A <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/KeyFilter.html">com.persistit.KeyFilter</a> can be supplied to restrict the results returned by the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#traverse(com.persistit.Key.Direction,%20boolean)">traverse</a> methods. You can specify discrete values or ranges for values of individual key segments and apply other simple predicates.</p>
+<p>See <a class="reference external" href="BasicAPI.html#basic-api"><em>Basic API</em></a>.</p>
 </div>
 <div class="section" id="transactions">
 <h3>Transactions<a class="headerlink" href="#transactions" title="Permalink to this headline">¶</a></h3>
 <p>Persistit provides ACID Transaction support with multi-version concurrency control (MVCC) and adjustable durability policy.</p>
-<p>See <a class="reference internal" href="Transactions.html#transactions"><em>Transactions</em></a>.</p>
+<p>See <a class="reference external" href="Transactions.html#transactions"><em>Transactions</em></a>.</p>
 </div>
 <div class="section" id="managing-persistit">
 <h3>Managing Persistit<a class="headerlink" href="#managing-persistit" title="Permalink to this headline">¶</a></h3>
@@ -267,7 +262,7 @@ journalpath=${datapath}/hwdemo_journal</pre>
 <li>The AdminUI tool which provides a graphical client interface for examining records and other resources</li>
 <li>Logging interface design for easy embedding in host applications</li>
 </ul>
-<p>See <a class="reference internal" href="Management.html#management"><em>Management</em></a>.</p>
+<p>See <a class="reference external" href="Management.html#management"><em>Management</em></a>.</p>
 </div>
 </div>
 </div>
@@ -278,58 +273,58 @@ journalpath=${datapath}/hwdemo_journal</pre>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Getting Started with Akiban Persistit</a><ul>
-<li><a class="reference internal" href="#download-and-install">Download and Install</a></li>
-<li><a class="reference internal" href="#working-with-persistit">Working with Persistit</a><ul>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Getting Started with Akiban Persistit</a><ul>
+<li><a class="reference external" href="#download-and-install">Download and Install</a></li>
+<li><a class="reference external" href="#working-with-persistit">Working with Persistit</a><ul>
+<li><a class="reference external" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#helloworld">HelloWorld</a></li>
-<li><a class="reference internal" href="#concepts">Concepts</a><ul>
-<li><a class="reference internal" href="#initialization-and-configuration">Initialization and Configuration</a></li>
-<li><a class="reference internal" href="#volumes-and-trees">Volumes and Trees</a></li>
+<li><a class="reference external" href="#helloworld">HelloWorld</a></li>
+<li><a class="reference external" href="#concepts">Concepts</a><ul>
+<li><a class="reference external" href="#initialization-and-configuration">Initialization and Configuration</a></li>
+<li><a class="reference external" href="#volumes-and-trees">Volumes and Trees</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#exchanges">Exchanges</a><ul>
-<li><a class="reference internal" href="#records">Records</a></li>
-<li><a class="reference internal" href="#keys">Keys</a></li>
-<li><a class="reference internal" href="#values">Values</a></li>
-<li><a class="reference internal" href="#storing-and-fetching-data">Storing and Fetching Data</a></li>
-<li><a class="reference internal" href="#closing-persistit">Closing Persistit</a></li>
+<li><a class="reference external" href="#exchanges">Exchanges</a><ul>
+<li><a class="reference external" href="#records">Records</a></li>
+<li><a class="reference external" href="#keys">Keys</a></li>
+<li><a class="reference external" href="#values">Values</a></li>
+<li><a class="reference external" href="#storing-and-fetching-data">Storing and Fetching Data</a></li>
+<li><a class="reference external" href="#closing-persistit">Closing Persistit</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#additional-topics">Additional Topics</a><ul>
-<li><a class="reference internal" href="#persistitmap">PersistitMap</a></li>
-<li><a class="reference internal" href="#keyfilters">KeyFilters</a></li>
-<li><a class="reference internal" href="#transactions">Transactions</a></li>
-<li><a class="reference internal" href="#managing-persistit">Managing Persistit</a></li>
+<li><a class="reference external" href="#additional-topics">Additional Topics</a><ul>
+<li><a class="reference external" href="#persistitmap">PersistitMap</a></li>
+<li><a class="reference external" href="#keyfilters">KeyFilters</a></li>
+<li><a class="reference external" href="#transactions">Transactions</a></li>
+<li><a class="reference external" href="#managing-persistit">Managing Persistit</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Akiban Persistit User Guide</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="BasicAPI.html"
-                        title="next chapter">Basic API</a></p>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Akiban Persistit User Guide</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="BasicAPI.html"
+                                  title="next chapter">Basic API</a></p>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -343,12 +338,12 @@ journalpath=${datapath}/hwdemo_journal</pre>
         <li class="right" >
           <a href="index.html" title="Akiban Persistit User Guide"
              >previous</a> |</li>
-        <li><a href="index.html">Persistit 3.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Akiban Technologies.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      &copy; Copyright 2013, Akiban Technologies.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
     </div>
   </body>
 </html>

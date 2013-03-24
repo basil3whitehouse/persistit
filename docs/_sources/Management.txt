@@ -81,7 +81,7 @@ Currently the following built-in Tasks are available:
 Executing a Task from an Application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The `execute(String) <http://akiban.github.com/persistit/javadoc/com/persistit/mxbeans/ManagementMXBean.html#execute(java.lang.String)>`_ and `launch(String) <http://akiban.github.com/persistit/javadoc/com/persistit/mxbeans/ManagementMXBean.html#launch(java.lang.String)>`_ methods both take a single String-valued argument, parse it to set up a ``Task`` and return a String-valued result. For example:
+The `execute <http://akiban.github.com/persistit/javadoc/com/persistit/mxbeans/ManagementMXBean.html#execute(java.lang.String)>`_ and `launch <http://akiban.github.com/persistit/javadoc/com/persistit/mxbeans/ManagementMXBean.html#launch(java.lang.String)>`_ methods both take a single String-valued argument, parse it to set up a ``Task`` and return a String-valued result. For example:
 
 .. code-block:: java
 
@@ -93,7 +93,7 @@ launches the backup task and then queries its status.
 Executing a Task from a JMX Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The `execute(String) <http://akiban.github.com/persistit/javadoc/com/persistit/mxbeans/ManagementMXBean.html#execute(java.lang.String)>`_ and `launch(String) <http://akiban.github.com/persistit/javadoc/com/persistit/mxbeans/ManagementMXBean.html#launch(java.lang.String)>`_ methods are exposed as operations on the `com.persistit.mxbeans.ManagementMXBean <http://akiban.github.com/persistit/javadoc/com/persistit/mxbeans/ManagementMXBean.html>`_.  You can invoke tasks
+The `execute <http://akiban.github.com/persistit/javadoc/com/persistit/mxbeans/ManagementMXBean.html#execute(java.lang.String)>`_ and `launch <http://akiban.github.com/persistit/javadoc/com/persistit/mxbeans/ManagementMXBean.html#launch(java.lang.String)>`_ methods are exposed as operations on the `com.persistit.mxbeans.ManagementMXBean <http://akiban.github.com/persistit/javadoc/com/persistit/mxbeans/ManagementMXBean.html>`_ object.  You can invoke tasks
 
 - via ``jconsole`` by typing the desired command line as the argument of the ``execute`` operation.
 - via a third-party JMX client such as ``jmxterm``.

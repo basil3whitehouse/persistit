@@ -30,7 +30,7 @@ To access Persistit, the application first constructs an instance of the `com.pe
 
 where ``config`` is a `com.persistit.Configuration <http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html>`_ that describes the memory allocation, initial set of volumes, journal file name, and other settings needed to get Persistit started. The configuration can also be specified as a ``java.util.Properties`` collection, or by name of a properties file. See :ref:`Configuration` for details.
 
-The `close() <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()>`_ method gracefully flushes all modified data to disk, stops background threads and unregisters JMX MBeans. 
+The `close <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()>`_ method gracefully flushes all modified data to disk, stops background threads and unregisters JMX MBeans. 
 
 .. note:: 
 
@@ -115,7 +115,7 @@ Value
 
 A `com.persistit.Value <http://akiban.github.com/persistit/javadoc/com/persistit/Value.html>`_ object holds a value. Unlike keys, Value objects have no restriction on the types of data they can represent, and they can hold much larger objects. In particular, a Value may contain null, any of the primitive types, or an object of any class.
 
-The backing store of a ``Value`` is a byte array that is written to a B+Tree data page, or in the case of a long record, multiple pages. The `put(boolean) <http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#put(boolean)>`_ method variants encode (serialize) a Java primitive or Object value into the backing store, and the `get() <http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#get()>`_ method variants decode (deserialize) the value.
+The backing store of a ``Value`` is a byte array that is written to a B+Tree data page, or in the case of a long record, multiple pages. The `put <http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#put(boolean)>`_ method variants encode (serialize) a Java primitive or Object value into the backing store, and the `get <http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#get()>`_ method variants decode (deserialize) the value.
 
 For example, in ``HelloWorld.java``, the line
 
@@ -158,7 +158,7 @@ See :ref:`Serialization` for additional information.
 Large Values
 ^^^^^^^^^^^^
 
-Persistit stores large values, in the current version up to 64MB in size. For example, it is possible to store an image’s backing bytes as a single value in the database. The size of the value to be stored is constrained by available heap memory; the entire value must be able to be serialized into an in-memory byte array in order for Persistit to store or retrieve it. Use `setMaximumSize(int) <http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#setMaximumSize(int)>`_ to specify a the size constraint. Large values are broken up across multiple data pages and are not necessarily stored in contiguous file areas.
+Persistit stores large values, in the current version up to 64MB in size. For example, it is possible to store an image’s backing bytes as a single value in the database. The size of the value to be stored is constrained by available heap memory; the entire value must be able to be serialized into an in-memory byte array in order for Persistit to store or retrieve it. Use `setMaximumSize <http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#setMaximumSize(int)>`_ to specify a the size constraint. Large values are broken up across multiple data pages and are not necessarily stored in contiguous file areas.
 
 The definition of “large” depends on the configuration properties. for example, for a volume with a page size of 16K bytes the threshold occurs at 6,108 bytes. A value having a serialized size smaller than this is stored in a single data page while a larger value is broken up and stored in multiple pages. For a smaller pages size the threshold is lower.
 
@@ -171,13 +171,13 @@ Exchange
 
 The primary low-level interface for interacting with Persistit is `com.persistit.Exchange <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html>`_. The Exchange class provides all methods for storing, deleting, fetching and traversing key/value pairs. These methods are summarized here and described in detail in the Javadoc API documentation.
 
-An Exchange instance contains references to a ``Key`` and a ``Value``. The methods `getKey() <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#getKey()>`_ and `getValue() <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#getValue()>`_ access these instances.
+An Exchange instance contains references to a ``Key`` and a ``Value``. The methods `getKey <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#getKey()>`_ and `getValue <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#getValue()>`_ access these instances.
 
 To construct an Exchange you specify a Volume (or alias) and a tree name in its constructor. The constructor will optionally create a new tree in that Volume if a tree having the specified name has not already been created. An application may construct an arbitrary number of Exchange objects. Creating a new Exchange has no effect on the database if the specified tree already exists. Tree creation is thread-safe: multiple threads concurrently constructing Exchanges using the same Tree name will safely result in the creation of only one new tree.
 
 An Exchange is a moderately complex object that can consume tens of kilobytes to megabytes (depending on the sizes of the Key and Value) of heap space. Memory-constrained applications should construct Exchanges in moderatation.
 
-Persistit offers Exchange pooling to avoid rapidly creating and destroying Exchange objects in multi-threaded applications.  An application may use the `getExchange(Volume, String, boolean) <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#getExchange(com.persistit.Volume,%20java.lang.String,%20boolean)>`_ and `releaseExchange(Exchange) <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#releaseExchange(com.persistit.Exchange)>`_ methods to take and return an Exchange from and to a thread-local pool.
+Persistit offers Exchange pooling to avoid rapidly creating and destroying Exchange objects in multi-threaded applications.  An application may use the `getExchange <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#getExchange(com.persistit.Volume,%20java.lang.String,%20boolean)>`_ and `releaseExchange <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#releaseExchange(com.persistit.Exchange)>`_ methods to take and return an Exchange from and to a thread-local pool.
 
 An Exchange internally maintains some optimization information such that references to nearby Keys within a tree are accelerated. Performance may benefit from using a different Exchange for each area of the Tree being accessed.
 
@@ -239,7 +239,7 @@ Exchange also delegates other key manipulation methods. (See `com.persistit.Exch
 Traversing and Querying Collections of Data
 -------------------------------------------
 
-An Exchange provides a number of methods for traversing a collection of records in the Persistit database. These include variations of the `traverse(Key.Direction, boolean) <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#traverse(com.persistit.Key.Direction,%20boolean)>`_, `next() <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#next()>`_ and `previous() <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#previous()>`_. For all of these methods, Persistit does two things: it modifies the Exchange's ``Key`` to reflect a new key that is before or after the current key, and it modifies the ``Value`` associated with the Exchange to reflect the database value associated with that key.
+An Exchange provides a number of methods for traversing a collection of records in the Persistit database. These include variations of the `traverse <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#traverse(com.persistit.Key.Direction,%20boolean)>`_, `next <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#next()>`_ and `previous <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#previous()>`_. For all of these methods, Persistit does two things: it modifies the Exchange's ``Key`` to reflect a new key that is before or after the current key, and it modifies the ``Value`` associated with the Exchange to reflect the database value associated with that key.
 
 For example, this code from ``HelloWorld.java`` prints out the key and value of each record in a tree:
 
@@ -264,7 +264,7 @@ Selecting key values with a KeyFilter
 
 A `com.persistit.KeyFilter <http://akiban.github.com/persistit/javadoc/com/persistit/KeyFilter.html>`_ defines a subset of all possible key values. For example, a KeyFilter can select keys with certain fixed segment values, sets of values or ranges of values.  Calling ``traverse``, ``next`` or ``previous`` with a KeyFilter efficiently traverses the subset of all keys in a Tree that match the filter.
 
-You construct a KeyFilter either by adding selection terms to it, or by calling the `parseKeyFilter() <http://akiban.github.com/persistit/javadoc/com/persistit/KeyParser.html#parseKeyFilter()>`_ method of the `com.persistit.KeyParser <http://akiban.github.com/persistit/javadoc/com/persistit/KeyParser.html>`_ class to construct one from a string representation.
+You construct a KeyFilter either by adding selection terms to it, or by calling the `parseKeyFilter <http://akiban.github.com/persistit/javadoc/com/persistit/KeyParser.html#parseKeyFilter()>`_ method of the `com.persistit.KeyParser <http://akiban.github.com/persistit/javadoc/com/persistit/KeyParser.html>`_ class to construct one from a string representation.
 
 Use of a KeyFilter is illustrated by the following code fragment:
 
@@ -304,7 +304,7 @@ places a key/value pair into Tree “myTree” with the concatenated key ``{"USA
 
 Generally the expected behavior for an Iterator on a Map collection view is to throw a ``ConcurrentModificationException`` if the underlying collection changes. This is known as “fail-fast” behavior. PersistitMap implements this behavior by throwing a ``ConcurrentModificationException`` in the event the Tree containing the map changes after the Iterator is constructed.
 
-However, sometimes it may be desirable to use PersistitMap and its collections view interfaces to iterate across changing data, especially for large databases. PersistitMap provides the method `setAllowConcurrentModification(boolean) <http://akiban.github.com/persistit/javadoc/com/persistit/PersistitMap.html#setAllowConcurrentModification(boolean)>`_ to control whether changes made by other threads are permitted. By default, concurrent modifications are not allowed.
+However, sometimes it may be desirable to use PersistitMap and its collections view interfaces to iterate across changing data, especially for large databases. PersistitMap provides the method `setAllowConcurrentModification <http://akiban.github.com/persistit/javadoc/com/persistit/PersistitMap.html#setAllowConcurrentModification(boolean)>`_ to control whether changes made by other threads are permitted. By default, concurrent modifications are not allowed.
 
 .. note:: When ``PersistitMap`` is used within a transaction updates generated by other concurrent transactions are not visible and   
    therefore cannot cause a ConcurrentModificationException.  However, to avoid unpredictable results an Iterator created within the scope 

@@ -5,10 +5,15 @@ Miscellaneous Topics
 
 Following are some short items you may find useful as you explore Akiban Persistit. Follow links to the API documentation for more details.
 
+TreeBuilder
+-----------
+
+The class `com.persistit.TreeBuilder <http://akiban.github.com/persistit/javadoc/com/persistit/TreeBuilder.html>`_ improves performance of inserting large sets of data when the keys being inserted are non-sequential. TreeBuilder is effective if and only if the size of the data being loaded is significantly larger than the amount of memory available in the buffer pool and keys are inserted in essentially random order.
+
 Histograms
 ----------
 
-The method `computeHistogram(Key, Key, int, int, KeyFilter, int) <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#computeHistogram(com.persistit.Key,%20com.persistit.Key,%20int,%20int,%20com.persistit.KeyFilter,%20int)>`_ class provides a way to sample and summarize a set of keys in a ``Tree``.  It works by traversing keys in index pages near the root of the tree.  Because only a small fraction of all the keys in the tree are represented in the index, this can result in relatively small sample set of keys relatively quickly. The result can be used to estimate the actual number of keys.
+The method `computeHistogram <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#computeHistogram(com.persistit.Key,%20com.persistit.Key,%20int,%20int,%20com.persistit.KeyFilter,%20int)>`_ class provides a way to sample and summarize a set of keys in a ``Tree``.  It works by traversing keys in index pages near the root of the tree.  Because only a small fraction of all the keys in the tree are represented in the index, this can result in relatively small sample set of keys relatively quickly. The result can be used to estimate the actual number of keys.
 
 Temporary Volumes
 -----------------
@@ -17,7 +22,7 @@ A Persistit temporary volume is a special kind of Volume that is deleted when Pe
 
 The primary use case for a temporary volume is an application that needs the unlimited size, but not the persistence of normal Persistit volumes.
 
-See the `createTemporaryVolume() <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#createTemporaryVolume()>`_ method for additional details.
+See the `createTemporaryVolume <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#createTemporaryVolume()>`_ method for additional details.
 
 Logging
 -------

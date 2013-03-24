@@ -1,31 +1,25 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Transactions &mdash; Persistit 3.2.2 documentation</title>
-    
+    <title>Transactions &mdash; Persistit v3.2.7 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '3.2.2',
-        COLLAPSE_INDEX: false,
+        URL_ROOT:    '#',
+        VERSION:     '3.2.7',
+        COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Persistit 3.2.2 documentation" href="index.html" />
+    <link rel="top" title="Persistit v3.2.7 documentation" href="index.html" />
     <link rel="next" title="Physical B+Tree Representation" href="PhysicalStorage.html" />
     <link rel="prev" title="Basic API" href="BasicAPI.html" /> 
   </head>
@@ -39,7 +33,7 @@
         <li class="right" >
           <a href="BasicAPI.html" title="Basic API"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Persistit 3.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -50,7 +44,7 @@
             
   <div class="section" id="transactions">
 <span id="id1"></span><h1>Transactions<a class="headerlink" href="#transactions" title="Permalink to this headline">¶</a></h1>
-<p>Akiban Persistit supports transactions with multi-version concurrency control (MVCC) using a protocol called Snapshot Isolation (SI). An application calls <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#begin()">begin()</a>, <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#commit()">commit()</a>, <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#rollback()">rollback()</a> and <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#end()">end()</a> methods to control the current transaction scope explicitly.  A Transaction allows an application to execute multiple database operations in an atomic, consistent, isolated and durable (ACID) manner.</p>
+<p>Akiban Persistit supports transactions with multi-version concurrency control (MVCC) using a protocol called Snapshot Isolation (SI). An application calls <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#begin()">begin</a>, <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#commit()">commit</a>, <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#rollback()">rollback</a> and <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#end()">end</a> methods to control the current transaction scope explicitly.  A Transaction allows an application to execute multiple database operations in an atomic, consistent, isolated and durable (ACID) manner.</p>
 <p>Applications manage transactions through an instance of a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html">com.persistit.Transaction</a> object. <tt class="docutils literal"><span class="pre">Transaction</span></tt> does not represent a single transaction, but is instead a context in which a thread may perform many sequential transactions. The general pattern is that the application gets the current thread’s <tt class="docutils literal"><span class="pre">Transaction</span></tt> instance, calls its <tt class="docutils literal"><span class="pre">begin</span></tt> method, performs work, calls <tt class="docutils literal"><span class="pre">commit</span></tt> and finally <tt class="docutils literal"><span class="pre">end</span></tt>.  The thread uses the same <tt class="docutils literal"><span class="pre">Transaction</span></tt> instance repeatedly. Generally each thread has one <tt class="docutils literal"><span class="pre">Transaction</span></tt> that lasts for the entire life of the thread (but see <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html">com.persistit.Transaction</a> for a mechanism that allows a transaction to be serviced by multiple threads).</p>
 <div class="section" id="using-transactions">
 <h2>Using Transactions<a class="headerlink" href="#using-transactions" title="Permalink to this headline">¶</a></h2>
@@ -88,7 +82,7 @@
 </div>
 <p>This example catches <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/exception/RollbackException.html">com.persistit.exception.RollbackException</a> which can be thrown by any Persistit operation within the scope of a transaction, including <tt class="docutils literal"><span class="pre">commit</span></tt>. Any code explicitly running within the scope of a transaction should be designed to handle rollbacks.</p>
 <p>This example also uses a <em>try/finally</em> block to ensure every call to <tt class="docutils literal"><span class="pre">begin</span></tt> has a matching call to <tt class="docutils literal"><span class="pre">end</span></tt>. This code pattern is mandatory: it is critical to correct transaction nesting behavior.</p>
-<p>One convenient way to do this is to encapsulate the logic of a transaction in an implementation of <tt class="docutils literal"><span class="pre">com.persisitit.TransactionRunnable</span></tt> interface. The <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#run(com.persistit.TransactionRunnable)">run(TransactionRunnable)</a> method automatically provides logic to begin the transaction, execute the TransactionRunnable and commit the transaction, repeating the process until no rollback is thrown or a maximum retry count is reached. For example, the code fragment shown above can be rewritten as:</p>
+<p>One convenient way to do this is to encapsulate the logic of a transaction in an implementation of <tt class="docutils literal"><span class="pre">com.persisitit.TransactionRunnable</span></tt> interface. The <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#run(com.persistit.TransactionRunnable)">run</a> method automatically provides logic to begin the transaction, execute the TransactionRunnable and commit the transaction, repeating the process until no rollback is thrown or a maximum retry count is reached. For example, the code fragment shown above can be rewritten as:</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="c1">//</span>
 <span class="c1">// Get the transaction context for the current thread.</span>
 <span class="c1">//</span>
@@ -140,13 +134,14 @@
 <h3>Snapshot Isolation is not Serializable<a class="headerlink" href="#snapshot-isolation-is-not-serializable" title="Permalink to this headline">¶</a></h3>
 <p>It is well-known that transactions executing under SI are not necessarily serializable. Under SI, so-called <em>write-skew</em> anomalies can happen with transactions that have certain kinds of interactions.  Write-skew can be avoided by (a) explicit application-level locking or (b) structuring transactions to add write-write dependencies where write-skew otherwise could occur.</p>
 <p>Note that many common transaction patterns, including those defined by the TPC-C benchmark, do not experience write-skew and therefore <em>are</em> serializable under SI.</p>
+<p>In the unusual case where transactions are susceptible to write skew, the Exchange#lock method offers a way for applications to create a write-write dependency explicitly. This mechanism provides an efficient mechanism for ensuring serializable behavior.</p>
 </div>
 </div>
 <div class="section" id="durability-options-commitpolicy">
 <h2>Durability Options: <tt class="docutils literal"><span class="pre">CommitPolicy</span></tt><a class="headerlink" href="#durability-options-commitpolicy" title="Permalink to this headline">¶</a></h2>
-<p>Persistit provides three policies that determine the durability of a transaction after it has executed the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#commit()">commit()</a> method. These are:</p>
+<p>Persistit provides three policies that determine the durability of a transaction after it has executed the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#commit()">commit</a> method. These are:</p>
 <blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">HARD</span></tt></dt>
 <dd>The <tt class="docutils literal"><span class="pre">commit</span></tt> method does not return until all updates created by the transaction have been written to non-volatile storage (e.g., disk storage).</dd>
 <dt><tt class="docutils literal"><span class="pre">GROUP</span></tt></dt>
@@ -156,8 +151,8 @@ transaction waits briefly in an attempt to recruit other transactions running in
 <dd>The <tt class="docutils literal"><span class="pre">commit</span></tt> method returns <em>before</em> the updates have been recorded on non-volatile storage. Persistit attempts to write them within 100 milliseconds, but
 this interval is not guaranteed.</dd>
 </dl>
-</div></blockquote>
-<p>You can specify a default policy in the Persistit initialization properties using the <tt class="docutils literal"><span class="pre">txnpolicy</span></tt> property or under program control using <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#setDefaultTransactionCommitPolicy(com.persistit.Transaction.CommitPolicy)">setDefaultTransactionCommitPolicy(Transaction.CommitPolicy)</a>. The default policy applies whenever the application calls the <tt class="docutils literal"><span class="pre">commit()</span></tt> method. You can override the default policy using <tt class="docutils literal"><span class="pre">commit(CommitPolicy)</span></tt>.</p>
+</blockquote>
+<p>You can specify a default policy in the Persistit initialization properties using the <tt class="docutils literal"><span class="pre">txnpolicy</span></tt> property or under program control using <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#setDefaultTransactionCommitPolicy(com.persistit.Transaction.CommitPolicy)">setDefaultTransactionCommitPolicy</a>. The default policy applies whenever the application calls the <tt class="docutils literal"><span class="pre">commit()</span></tt> method. You can override the default policy using <tt class="docutils literal"><span class="pre">commit(CommitPolicy)</span></tt>.</p>
 <p>HARD and GROUP ensure each transaction is written durably to non-volatile storage before the <tt class="docutils literal"><span class="pre">commit</span></tt> method returns. The difference is that GROUP can improve throughput in multi-threaded applications because the average number of I/O operations needed to commit <em>N</em> transactions can be smaller than <em>N</em>. However, for one or a small number of concurrent threads, GROUP reduces throughput because it works by introducing a delay to allow other concurrent transactions to commit within a single I/O operation.</p>
 <p>SOFT commits are generally much faster than HARD or GROUP commits, especially for single-threaded applications, because the results of numerous transactions committed from a single thread can be aggregated and written to disk in a single I/O operation. However, transactions written with the SOFT commit policy are not immediately durable and it is possible that the recovered state of a database will be missing transactions that reported they were committed shortly before a crash.</p>
 <p>For SOFT commits, the state of the database after restart is such that for any committed transaction T, either all or none of its modifications will be present in the recovered database. Further, if a transaction T2 reads or updates data that was written by any other transaction T1, and if T2 is present in the recovered database, then so is T1. Any transaction that was in progress, but had not been committed at the time of the failure, is guaranteed not to be present in the recovered database. SOFT commits are designed to be durable within 100 milliseconds after <tt class="docutils literal"><span class="pre">commit</span></tt> returns. However, this interval is determined by computing the average duration of recent I/O operations to predict the completion time of the I/O that will write the transaction to disk, and therefore the interval cannot be guaranteed.</p>
@@ -173,7 +168,7 @@ this interval is not guaranteed.</dd>
 <p>Persistit provides the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Accumulator.html">com.persistit.Accumulator</a> class to avoid this problem.  An accumulator is designed to manage contributions from multiple concurrent transactions without causing write-write dependencies. Accumulators are durable in the sense that each transaction’s contribution is made durable with the transaction itself, and Persistit automatically recovers a correct state for each Accumulator in the event of a system crash.</p>
 <p>There are four types of accumulator in Persistit. Each is a concrete subclass of the abstract <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Accumulator.html">com.persistit.Accumulator</a> class:</p>
 <blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">SUM</span></tt></dt>
 <dd>Tallies a count or sum of contributions by each transaction</dd>
 <dt><tt class="docutils literal"><span class="pre">MIN</span></tt></dt>
@@ -183,7 +178,7 @@ this interval is not guaranteed.</dd>
 <dt><tt class="docutils literal"><span class="pre">SEQ</span></tt></dt>
 <dd>Special case of the SUM accumulator used to generate sequence numbers</dd>
 </dl>
-</div></blockquote>
+</blockquote>
 <p>Accumulator instances are associated with a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Tree.html">com.persistit.Tree</a>.  Each <tt class="docutils literal"><span class="pre">Tree</span></tt> may have up to 64 accumulators. The following code fragment creates and/or acquires a <tt class="docutils literal"><span class="pre">SumAccumulator</span></tt>, reads its snapshot value and then adds one to it:</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="kd">final</span> <span class="n">Exchange</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">_persistit</span><span class="o">.</span><span class="na">getExchange</span><span class="o">(</span><span class="n">volume</span><span class="o">,</span> <span class="n">treeName</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 <span class="kd">final</span> <span class="n">Transaction</span> <span class="n">txn</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">();</span>
@@ -200,17 +195,17 @@ this interval is not guaranteed.</dd>
 </pre></div>
 </div>
 <p>The value 17 is simply an arbitrary index number between 0 and 63, inclusive. The application is responsible for allocating and managing accumulator indexes.</p>
-<p>The snapshot value of an accumulator obtained through <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Accumulator.html#getSnapshotValue(com.persistit.Transaction)">getSnapshotValue(Transaction)</a> is the value computed from all updates contributed by transactions that had committed at the time the current transaction started, plus the transaction’s own as-yet uncommitted updates. In other words, the snapshot value of the accumulator is consistent with the snapshot view of all other data visible within the transaction.</p>
+<p>The snapshot value of an accumulator obtained through <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Accumulator.html#getSnapshotValue(com.persistit.Transaction)">getSnapshotValue</a> is the value computed from all updates contributed by transactions that had committed at the time the current transaction started, plus the transaction’s own as-yet uncommitted updates. In other words, the snapshot value of the accumulator is consistent with the snapshot view of all other data visible within the transaction.</p>
 <p>An accumulator has two ways of accessing its accumulated value:</p>
 <blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">getSnapshotValue()</span></tt></dt>
 <dd>Is a value computed from updates that were committed at the start of the current transaction. This method may be called only within the scope of a
 Transaction.</dd>
 <dt><tt class="docutils literal"><span class="pre">getLiveValue()</span></tt></dt>
 <dd>Is an ephemeral value reflecting all updates performed by all transactions, including concurrent and aborted transactions.</dd>
 </dl>
-</div></blockquote>
+</blockquote>
 <p>The snapshot value is a precise, consistent tally, while the live value is approximate. For a <tt class="docutils literal"><span class="pre">SumAccumulator</span></tt>, <tt class="docutils literal"><span class="pre">MaxAccumulator</span></tt> or <tt class="docutils literal"><span class="pre">SeqAccumulator</span></tt>, if all updates are have non-negative arguments, then the live value is always greater than or equal to the snapshot value.</p>
 <div class="section" id="seqaccumulator">
 <h3>SeqAccumulator<a class="headerlink" href="#seqaccumulator" title="Permalink to this headline">¶</a></h3>
@@ -225,50 +220,50 @@ Transaction.</dd>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Transactions</a><ul>
-<li><a class="reference internal" href="#using-transactions">Using Transactions</a><ul>
-<li><a class="reference internal" href="#mixing-transactional-and-non-transactional-operations">Mixing Transactional and Non-Transactional Operations</a></li>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Transactions</a><ul>
+<li><a class="reference external" href="#using-transactions">Using Transactions</a><ul>
+<li><a class="reference external" href="#mixing-transactional-and-non-transactional-operations">Mixing Transactional and Non-Transactional Operations</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#optimistic-transaction-scheduling">Optimistic Transaction Scheduling</a><ul>
-<li><a class="reference internal" href="#id3">Snapshot Isolation</a></li>
-<li><a class="reference internal" href="#pruning">Pruning</a></li>
-<li><a class="reference internal" href="#rollbacks">Rollbacks</a></li>
-<li><a class="reference internal" href="#read-only-transactions">Read-Only Transactions</a></li>
-<li><a class="reference internal" href="#snapshot-isolation-is-not-serializable">Snapshot Isolation is not Serializable</a></li>
+<li><a class="reference external" href="#optimistic-transaction-scheduling">Optimistic Transaction Scheduling</a><ul>
+<li><a class="reference external" href="#id3">Snapshot Isolation</a></li>
+<li><a class="reference external" href="#pruning">Pruning</a></li>
+<li><a class="reference external" href="#rollbacks">Rollbacks</a></li>
+<li><a class="reference external" href="#read-only-transactions">Read-Only Transactions</a></li>
+<li><a class="reference external" href="#snapshot-isolation-is-not-serializable">Snapshot Isolation is not Serializable</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#durability-options-commitpolicy">Durability Options: <tt class="docutils literal"><span class="pre">CommitPolicy</span></tt></a></li>
-<li><a class="reference internal" href="#nested-transactions">Nested Transactions</a></li>
-<li><a class="reference internal" href="#accumulators">Accumulators</a><ul>
-<li><a class="reference internal" href="#seqaccumulator">SeqAccumulator</a></li>
+<li><a class="reference external" href="#durability-options-commitpolicy">Durability Options: <tt class="docutils literal"><span class="pre">CommitPolicy</span></tt></a></li>
+<li><a class="reference external" href="#nested-transactions">Nested Transactions</a></li>
+<li><a class="reference external" href="#accumulators">Accumulators</a><ul>
+<li><a class="reference external" href="#seqaccumulator">SeqAccumulator</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="BasicAPI.html"
-                        title="previous chapter">Basic API</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="PhysicalStorage.html"
-                        title="next chapter">Physical B+Tree Representation</a></p>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="BasicAPI.html"
+                                  title="previous chapter">Basic API</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="PhysicalStorage.html"
+                                  title="next chapter">Physical B+Tree Representation</a></p>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -282,12 +277,12 @@ Transaction.</dd>
         <li class="right" >
           <a href="BasicAPI.html" title="Basic API"
              >previous</a> |</li>
-        <li><a href="index.html">Persistit 3.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Akiban Technologies.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      &copy; Copyright 2013, Akiban Technologies.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
     </div>
   </body>
 </html>

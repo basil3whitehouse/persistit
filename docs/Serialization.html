@@ -1,31 +1,25 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Serializing Object Values &mdash; Persistit 3.2.2 documentation</title>
-    
+    <title>Serializing Object Values &mdash; Persistit v3.2.7 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '3.2.2',
-        COLLAPSE_INDEX: false,
+        URL_ROOT:    '#',
+        VERSION:     '3.2.7',
+        COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Persistit 3.2.2 documentation" href="index.html" />
+    <link rel="top" title="Persistit v3.2.7 documentation" href="index.html" />
     <link rel="next" title="Miscellaneous Topics" href="Miscellaneous.html" />
     <link rel="prev" title="Security Notes" href="Security.html" /> 
   </head>
@@ -39,7 +33,7 @@
         <li class="right" >
           <a href="Security.html" title="Security Notes"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Persistit 3.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -140,7 +134,7 @@
 java.lang.reflect.ReflectPermission("suppressAccessChecks")
 java.io.SerializablePermission("enableSubclassImplementation")</pre>
 </div>
-<p>See <a class="reference internal" href="Security.html#security"><em>Security Notes</em></a> for an extended discussion on security policy issues for Persistit.</p>
+<p>See <a class="reference external" href="Security.html#security"><em>Security Notes</em></a> for an extended discussion on security policy issues for Persistit.</p>
 </div>
 </div>
 <div class="section" id="serialvaluecoder">
@@ -167,7 +161,7 @@ java.io.SerializablePermission("enableSubclassImplementation")</pre>
 <p>Names are separated by commas and may contain wild cards.</p>
 <p>The following are valid patterns:</p>
 <blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">java.io.File</span></tt></dt>
 <dd>Just the File class.</dd>
 <dt><tt class="docutils literal"><span class="pre">java.io.*</span></tt></dt>
@@ -179,7 +173,7 @@ java.io.SerializablePermission("enableSubclassImplementation")</pre>
 <dt><tt class="docutils literal"><span class="pre">**</span></tt></dt>
 <dd>All classes in all packages</dd>
 </dl>
-</div></blockquote>
+</blockquote>
 <p>More precisely, <tt class="docutils literal"><span class="pre">serialOverride</span></tt> specifies a comma-delimited list of zero or more patterns, each of which is either a fully-qualified class name or pattern that has within it exactly one wild card. The wild card “*” replaces any sequence of characters other than a period (“.”), while “**” replaces any sequence of characters including periods.  For example:</p>
 <div class="highlight-python"><pre>serialOverride=org.apache.**,com.mypkg.serialstuff.*,com.mypkg.MyClass</pre>
 </div>
@@ -221,7 +215,7 @@ java.io.SerializablePermission("enableSubclassImplementation")</pre>
 <li>If the state represented by this Value is undefined, then return &#8220;undefined&#8221;.</li>
 <li>If the state is null or a boolean, return &#8220;null&#8221; &#8220;false&#8221;, or &#8220;true&#8221;.</li>
 <li>If the value represents a primitive type, return the string representation of the value, prefixed by &#8220;(byte)&#8221;, &#8220;(short)&#8221;, &#8220;(char)&#8221;, &#8220;(long)&#8221;, or &#8220;(float)&#8221; for the corresponding types. Values of type int and double are presented without prefix to reduce clutter.</li>
-<li>If the value represents a String, return a modified form of the string enclosed in double quotes. For each character of the string, if it is a double quote replace it by &#8220;&#8221;&#8221;, otherwise if it is outside of the printable ASCII character set replace the character in the modified string by &#8220;b&#8221;, &#8220;t&#8221;, &#8220;n&#8221;, &#8220;r&#8221; or &#8220;uNNNN&#8221; such that the modified string would be a valid Java string constant.</li>
+<li>If the value represents a String, return a modified form of the string enclosed in double quotes. For each character of the string, if it is a double quote replace it by &#8220;&#8221;&#8220;, otherwise if it is outside of the printable ASCII character set replace the character in the modified string by &#8220;b&#8221;, &#8220;t&#8221;, &#8220;n&#8221;, &#8220;r&#8221; or &#8220;uNNNN&#8221; such that the modified string would be a valid Java string constant.</li>
 <li>If the value represents a wrapper for a primitive value (i.e., a java.lang.Boolean, java.lang.Byte, etc.) return the string representation of the value prefixed by &#8220;(Boolean)&#8221;, &#8220;(Byte)&#8221;, &#8220;(Short)&#8221;, &#8220;(Character)&#8221;, &#8220;(Integer)&#8221;, &#8220;(Long)&#8221;, &#8220;(Float)&#8221; or &#8220;(Double)&#8221;.  The package name java.lang is removed to reduce clutter.</li>
 <li>If the value represents a java.util.Date, return a formatted representation of the date using the format specified by Key.SDF. This is a readable format that displays the date with full precision, including milliseconds.</li>
 <li>If the value represents an array, return a list of comma-separated element values surrounded by square brackets.</li>
@@ -258,48 +252,48 @@ java.io.SerializablePermission("enableSubclassImplementation")</pre>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Serializing Object Values</a><ul>
-<li><a class="reference internal" href="#storing-objects-in-persistit">Storing Objects in Persistit</a></li>
-<li><a class="reference internal" href="#defaultvaluecoder-and-serialvaluecoder">DefaultValueCoder and SerialValueCoder</a></li>
-<li><a class="reference internal" href="#defaultvaluecoder">DefaultValueCoder</a><ul>
-<li><a class="reference internal" href="#constructing-objects-upon-deserialization">Constructing Objects upon Deserialization</a></li>
-<li><a class="reference internal" href="#extending-defaultvaluecoder">Extending DefaultValueCoder</a></li>
-<li><a class="reference internal" href="#security-policy-requirements-for-defaultvaluecoder">Security Policy Requirements for DefaultValueCoder</a></li>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Serializing Object Values</a><ul>
+<li><a class="reference external" href="#storing-objects-in-persistit">Storing Objects in Persistit</a></li>
+<li><a class="reference external" href="#defaultvaluecoder-and-serialvaluecoder">DefaultValueCoder and SerialValueCoder</a></li>
+<li><a class="reference external" href="#defaultvaluecoder">DefaultValueCoder</a><ul>
+<li><a class="reference external" href="#constructing-objects-upon-deserialization">Constructing Objects upon Deserialization</a></li>
+<li><a class="reference external" href="#extending-defaultvaluecoder">Extending DefaultValueCoder</a></li>
+<li><a class="reference external" href="#security-policy-requirements-for-defaultvaluecoder">Security Policy Requirements for DefaultValueCoder</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#serialvaluecoder">SerialValueCoder</a><ul>
-<li><a class="reference internal" href="#the-serial-override-configuration-property">The Serial Override Configuration Property</a></li>
+<li><a class="reference external" href="#serialvaluecoder">SerialValueCoder</a><ul>
+<li><a class="reference external" href="#the-serial-override-configuration-property">The Serial Override Configuration Property</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#registering-objects-in-a-custom-valuecoder">Registering Objects in a Custom <tt class="docutils literal"><span class="pre">ValueCoder</span></tt></a></li>
-<li><a class="reference internal" href="#value-tostring-and-decodedisplayable"><tt class="docutils literal"><span class="pre">Value.toString()</span></tt> and <tt class="docutils literal"><span class="pre">decodeDisplayable</span></tt></a></li>
-<li><a class="reference internal" href="#persistitreference">PersistitReference</a></li>
-<li><a class="reference internal" href="#objectcache">ObjectCache</a></li>
+<li><a class="reference external" href="#registering-objects-in-a-custom-valuecoder">Registering Objects in a Custom <tt class="docutils literal"><span class="pre">ValueCoder</span></tt></a></li>
+<li><a class="reference external" href="#value-tostring-and-decodedisplayable"><tt class="docutils literal"><span class="pre">Value.toString()</span></tt> and <tt class="docutils literal"><span class="pre">decodeDisplayable</span></tt></a></li>
+<li><a class="reference external" href="#persistitreference">PersistitReference</a></li>
+<li><a class="reference external" href="#objectcache">ObjectCache</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="Security.html"
-                        title="previous chapter">Security Notes</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="Miscellaneous.html"
-                        title="next chapter">Miscellaneous Topics</a></p>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="Security.html"
+                                  title="previous chapter">Security Notes</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="Miscellaneous.html"
+                                  title="next chapter">Miscellaneous Topics</a></p>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -313,12 +307,12 @@ java.io.SerializablePermission("enableSubclassImplementation")</pre>
         <li class="right" >
           <a href="Security.html" title="Security Notes"
              >previous</a> |</li>
-        <li><a href="index.html">Persistit 3.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Akiban Technologies.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      &copy; Copyright 2013, Akiban Technologies.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
     </div>
   </body>
 </html>

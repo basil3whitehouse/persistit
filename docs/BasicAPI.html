@@ -1,31 +1,25 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Basic API &mdash; Persistit 3.2.2 documentation</title>
-    
+    <title>Basic API &mdash; Persistit v3.2.7 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '3.2.2',
-        COLLAPSE_INDEX: false,
+        URL_ROOT:    '#',
+        VERSION:     '3.2.7',
+        COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Persistit 3.2.2 documentation" href="index.html" />
+    <link rel="top" title="Persistit v3.2.7 documentation" href="index.html" />
     <link rel="next" title="Transactions" href="Transactions.html" />
     <link rel="prev" title="Getting Started with Akiban Persistit" href="GettingStarted.html" /> 
   </head>
@@ -39,7 +33,7 @@
         <li class="right" >
           <a href="GettingStarted.html" title="Getting Started with Akiban Persistit"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Persistit 3.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -69,14 +63,14 @@
 <span class="o">}</span>
 </pre></div>
 </div>
-<p>where <tt class="docutils literal"><span class="pre">config</span></tt> is a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html">com.persistit.Configuration</a> that describes the memory allocation, initial set of volumes, journal file name, and other settings needed to get Persistit started. The configuration can also be specified as a <tt class="docutils literal"><span class="pre">java.util.Properties</span></tt> collection, or by name of a properties file. See <a class="reference internal" href="Configuration.html#configuration"><em>Configuration</em></a> for details.</p>
-<p>The <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()">close()</a> method gracefully flushes all modified data to disk, stops background threads and unregisters JMX MBeans.</p>
+<p>where <tt class="docutils literal"><span class="pre">config</span></tt> is a <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html">com.persistit.Configuration</a> that describes the memory allocation, initial set of volumes, journal file name, and other settings needed to get Persistit started. The configuration can also be specified as a <tt class="docutils literal"><span class="pre">java.util.Properties</span></tt> collection, or by name of a properties file. See <a class="reference external" href="Configuration.html#configuration"><em>Configuration</em></a> for details.</p>
+<p>The <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()">close</a> method gracefully flushes all modified data to disk, stops background threads and unregisters JMX MBeans.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The Persistit background threads are not daemon threads, so if your application returns
 from its static main method without calling <tt class="docutils literal"><span class="pre">close</span></tt>, the JVM will not automatically exit.</p>
 </div>
-<p>Although normal shutdown should always invoke <tt class="docutils literal"><span class="pre">close</span></tt>, Persistit is designed to recover a consistent database state in the event of an abrupt shutdown or crash. See <a class="reference internal" href="PhysicalStorage.html#recovery"><em>Recovery</em></a>.</p>
+<p>Although normal shutdown should always invoke <tt class="docutils literal"><span class="pre">close</span></tt>, Persistit is designed to recover a consistent database state in the event of an abrupt shutdown or crash. See <a class="reference external" href="PhysicalStorage.html#recovery"><em>Recovery</em></a>.</p>
 </div>
 <div class="section" id="key">
 <span id="id2"></span><h2>Key<a class="headerlink" href="#key" title="Permalink to this headline">¶</a></h2>
@@ -134,7 +128,7 @@ byte[]</pre>
 <div class="section" id="value">
 <span id="id5"></span><h2>Value<a class="headerlink" href="#value" title="Permalink to this headline">¶</a></h2>
 <p>A <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Value.html">com.persistit.Value</a> object holds a value. Unlike keys, Value objects have no restriction on the types of data they can represent, and they can hold much larger objects. In particular, a Value may contain null, any of the primitive types, or an object of any class.</p>
-<p>The backing store of a <tt class="docutils literal"><span class="pre">Value</span></tt> is a byte array that is written to a B+Tree data page, or in the case of a long record, multiple pages. The <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#put(boolean)">put(boolean)</a> method variants encode (serialize) a Java primitive or Object value into the backing store, and the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#get()">get()</a> method variants decode (deserialize) the value.</p>
+<p>The backing store of a <tt class="docutils literal"><span class="pre">Value</span></tt> is a byte array that is written to a B+Tree data page, or in the case of a long record, multiple pages. The <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#put(boolean)">put</a> method variants encode (serialize) a Java primitive or Object value into the backing store, and the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#get()">get</a> method variants decode (deserialize) the value.</p>
 <p>For example, in <tt class="docutils literal"><span class="pre">HelloWorld.java</span></tt>, the line</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="n">dbex</span><span class="o">.</span><span class="na">getValue</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;World&quot;</span><span class="o">);</span>
 </pre></div>
@@ -163,11 +157,11 @@ java.util.Date</pre>
 <li>Otherwise, for classes that implement java.io.Serializable, Persistit attempts to perform default Java serialization and deserialization.</li>
 </ul>
 <p>A Value may also be in the undefined state, which results from performing a fetch operation on a key for which no value is present in the database. The undefined state is distinct from the value <tt class="docutils literal"><span class="pre">null</span></tt> and can be tested with the <tt class="docutils literal"><span class="pre">isDefined()</span></tt> method.</p>
-<p>See <a class="reference internal" href="Serialization.html#serialization"><em>Serializing Object Values</em></a> for additional information.</p>
+<p>See <a class="reference external" href="Serialization.html#serialization"><em>Serializing Object Values</em></a> for additional information.</p>
 </div>
 <div class="section" id="large-values">
 <h3>Large Values<a class="headerlink" href="#large-values" title="Permalink to this headline">¶</a></h3>
-<p>Persistit stores large values, in the current version up to 64MB in size. For example, it is possible to store an image’s backing bytes as a single value in the database. The size of the value to be stored is constrained by available heap memory; the entire value must be able to be serialized into an in-memory byte array in order for Persistit to store or retrieve it. Use <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#setMaximumSize(int)">setMaximumSize(int)</a> to specify a the size constraint. Large values are broken up across multiple data pages and are not necessarily stored in contiguous file areas.</p>
+<p>Persistit stores large values, in the current version up to 64MB in size. For example, it is possible to store an image’s backing bytes as a single value in the database. The size of the value to be stored is constrained by available heap memory; the entire value must be able to be serialized into an in-memory byte array in order for Persistit to store or retrieve it. Use <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Value.html#setMaximumSize(int)">setMaximumSize</a> to specify a the size constraint. Large values are broken up across multiple data pages and are not necessarily stored in contiguous file areas.</p>
 <p>The definition of “large” depends on the configuration properties. for example, for a volume with a page size of 16K bytes the threshold occurs at 6,108 bytes. A value having a serialized size smaller than this is stored in a single data page while a larger value is broken up and stored in multiple pages. For a smaller pages size the threshold is lower.</p>
 <p>On occasion it may be desirable to fetch only part of a large value. For example, it may be useful to extract summary information from the beginning of a the backing byte array for an Image. Variants versions of the <tt class="docutils literal"><span class="pre">fetch</span></tt> and <tt class="docutils literal"><span class="pre">traverse</span></tt> accept a minimum byte count parameter. When these methods are used only the specified minimum number bytes of the backing store are retrieved from the database. This technique can prevent Persistit from reading large numbers of pages from the disk in order to examine only a small portion of the record.</p>
 </div>
@@ -175,10 +169,10 @@ java.util.Date</pre>
 <div class="section" id="exchange">
 <span id="id6"></span><h2>Exchange<a class="headerlink" href="#exchange" title="Permalink to this headline">¶</a></h2>
 <p>The primary low-level interface for interacting with Persistit is <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html">com.persistit.Exchange</a>. The Exchange class provides all methods for storing, deleting, fetching and traversing key/value pairs. These methods are summarized here and described in detail in the Javadoc API documentation.</p>
-<p>An Exchange instance contains references to a <tt class="docutils literal"><span class="pre">Key</span></tt> and a <tt class="docutils literal"><span class="pre">Value</span></tt>. The methods <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#getKey()">getKey()</a> and <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#getValue()">getValue()</a> access these instances.</p>
+<p>An Exchange instance contains references to a <tt class="docutils literal"><span class="pre">Key</span></tt> and a <tt class="docutils literal"><span class="pre">Value</span></tt>. The methods <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#getKey()">getKey</a> and <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#getValue()">getValue</a> access these instances.</p>
 <p>To construct an Exchange you specify a Volume (or alias) and a tree name in its constructor. The constructor will optionally create a new tree in that Volume if a tree having the specified name has not already been created. An application may construct an arbitrary number of Exchange objects. Creating a new Exchange has no effect on the database if the specified tree already exists. Tree creation is thread-safe: multiple threads concurrently constructing Exchanges using the same Tree name will safely result in the creation of only one new tree.</p>
 <p>An Exchange is a moderately complex object that can consume tens of kilobytes to megabytes (depending on the sizes of the Key and Value) of heap space. Memory-constrained applications should construct Exchanges in moderatation.</p>
-<p>Persistit offers Exchange pooling to avoid rapidly creating and destroying Exchange objects in multi-threaded applications.  An application may use the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#getExchange(com.persistit.Volume,%20java.lang.String,%20boolean)">getExchange(Volume, String, boolean)</a> and <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#releaseExchange(com.persistit.Exchange)">releaseExchange(Exchange)</a> methods to take and return an Exchange from and to a thread-local pool.</p>
+<p>Persistit offers Exchange pooling to avoid rapidly creating and destroying Exchange objects in multi-threaded applications.  An application may use the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#getExchange(com.persistit.Volume,%20java.lang.String,%20boolean)">getExchange</a> and <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#releaseExchange(com.persistit.Exchange)">releaseExchange</a> methods to take and return an Exchange from and to a thread-local pool.</p>
 <p>An Exchange internally maintains some optimization information such that references to nearby Keys within a tree are accelerated. Performance may benefit from using a different Exchange for each area of the Tree being accessed.</p>
 <div class="section" id="concurrent-operations-on-exchanges">
 <h3>Concurrent Operations on Exchanges<a class="headerlink" href="#concurrent-operations-on-exchanges" title="Permalink to this headline">¶</a></h3>
@@ -230,7 +224,7 @@ java.util.Date</pre>
 </div>
 <div class="section" id="traversing-and-querying-collections-of-data">
 <h2>Traversing and Querying Collections of Data<a class="headerlink" href="#traversing-and-querying-collections-of-data" title="Permalink to this headline">¶</a></h2>
-<p>An Exchange provides a number of methods for traversing a collection of records in the Persistit database. These include variations of the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#traverse(com.persistit.Key.Direction,%20boolean)">traverse(Key.Direction, boolean)</a>, <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#next()">next()</a> and <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#previous()">previous()</a>. For all of these methods, Persistit does two things: it modifies the Exchange&#8217;s <tt class="docutils literal"><span class="pre">Key</span></tt> to reflect a new key that is before or after the current key, and it modifies the <tt class="docutils literal"><span class="pre">Value</span></tt> associated with the Exchange to reflect the database value associated with that key.</p>
+<p>An Exchange provides a number of methods for traversing a collection of records in the Persistit database. These include variations of the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#traverse(com.persistit.Key.Direction,%20boolean)">traverse</a>, <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#next()">next</a> and <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#previous()">previous</a>. For all of these methods, Persistit does two things: it modifies the Exchange&#8217;s <tt class="docutils literal"><span class="pre">Key</span></tt> to reflect a new key that is before or after the current key, and it modifies the <tt class="docutils literal"><span class="pre">Value</span></tt> associated with the Exchange to reflect the database value associated with that key.</p>
 <p>For example, this code from <tt class="docutils literal"><span class="pre">HelloWorld.java</span></tt> prints out the key and value of each record in a tree:</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="n">dbex</span><span class="o">.</span><span class="na">getKey</span><span class="o">().</span><span class="na">to</span><span class="o">(</span><span class="n">Key</span><span class="o">.</span><span class="na">BEFORE</span><span class="o">);</span>
 <span class="k">while</span> <span class="o">(</span><span class="n">dbex</span><span class="o">.</span><span class="na">next</span><span class="o">())</span>
@@ -246,7 +240,7 @@ java.util.Date</pre>
 <div class="section" id="selecting-key-values-with-a-keyfilter">
 <span id="keyfilter"></span><h3>Selecting key values with a KeyFilter<a class="headerlink" href="#selecting-key-values-with-a-keyfilter" title="Permalink to this headline">¶</a></h3>
 <p>A <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/KeyFilter.html">com.persistit.KeyFilter</a> defines a subset of all possible key values. For example, a KeyFilter can select keys with certain fixed segment values, sets of values or ranges of values.  Calling <tt class="docutils literal"><span class="pre">traverse</span></tt>, <tt class="docutils literal"><span class="pre">next</span></tt> or <tt class="docutils literal"><span class="pre">previous</span></tt> with a KeyFilter efficiently traverses the subset of all keys in a Tree that match the filter.</p>
-<p>You construct a KeyFilter either by adding selection terms to it, or by calling the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/KeyParser.html#parseKeyFilter()">parseKeyFilter()</a> method of the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/KeyParser.html">com.persistit.KeyParser</a> class to construct one from a string representation.</p>
+<p>You construct a KeyFilter either by adding selection terms to it, or by calling the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/KeyParser.html#parseKeyFilter()">parseKeyFilter</a> method of the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/KeyParser.html">com.persistit.KeyParser</a> class to construct one from a string representation.</p>
 <p>Use of a KeyFilter is illustrated by the following code fragment:</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="n">Exchange</span> <span class="n">ex</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Exchange</span><span class="o">(</span><span class="s">&quot;myVolume&quot;</span><span class="o">,</span> <span class="s">&quot;myTree&quot;</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 <span class="n">KeyFilter</span> <span class="n">kf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">KeyFilter</span><span class="o">(</span><span class="s">&quot;{\&quot;Beethoven\&quot;:\&quot;Britten\&quot;}&quot;</span><span class="o">);</span>
@@ -273,7 +267,7 @@ java.util.Date</pre>
 </div>
 <p>places a key/value pair into Tree “myTree” with the concatenated key <tt class="docutils literal"><span class="pre">{&quot;USA</span> <span class="pre">&quot;,&quot;MA&quot;,&quot;Boston&quot;}</span></tt> and a value <tt class="docutils literal"><span class="pre">&quot;Hub&quot;</span></tt>.</p>
 <p>Generally the expected behavior for an Iterator on a Map collection view is to throw a <tt class="docutils literal"><span class="pre">ConcurrentModificationException</span></tt> if the underlying collection changes. This is known as “fail-fast” behavior. PersistitMap implements this behavior by throwing a <tt class="docutils literal"><span class="pre">ConcurrentModificationException</span></tt> in the event the Tree containing the map changes after the Iterator is constructed.</p>
-<p>However, sometimes it may be desirable to use PersistitMap and its collections view interfaces to iterate across changing data, especially for large databases. PersistitMap provides the method <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/PersistitMap.html#setAllowConcurrentModification(boolean)">setAllowConcurrentModification(boolean)</a> to control whether changes made by other threads are permitted. By default, concurrent modifications are not allowed.</p>
+<p>However, sometimes it may be desirable to use PersistitMap and its collections view interfaces to iterate across changing data, especially for large databases. PersistitMap provides the method <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/PersistitMap.html#setAllowConcurrentModification(boolean)">setAllowConcurrentModification</a> to control whether changes made by other threads are permitted. By default, concurrent modifications are not allowed.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">When <tt class="docutils literal"><span class="pre">PersistitMap</span></tt> is used within a transaction updates generated by other concurrent transactions are not visible and
@@ -304,56 +298,56 @@ of a transaction must be used only within that transaction.</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Basic API</a><ul>
-<li><a class="reference internal" href="#the-persistit-instance">The Persistit Instance</a></li>
-<li><a class="reference internal" href="#key">Key</a><ul>
-<li><a class="reference internal" href="#appending-and-decoding-key-segments">Appending and Decoding Key Segments</a></li>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Basic API</a><ul>
+<li><a class="reference external" href="#the-persistit-instance">The Persistit Instance</a></li>
+<li><a class="reference external" href="#key">Key</a><ul>
+<li><a class="reference external" href="#appending-and-decoding-key-segments">Appending and Decoding Key Segments</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#value">Value</a><ul>
-<li><a class="reference internal" href="#value-types">Value Types</a></li>
-<li><a class="reference internal" href="#large-values">Large Values</a></li>
+<li><a class="reference external" href="#value">Value</a><ul>
+<li><a class="reference external" href="#value-types">Value Types</a></li>
+<li><a class="reference external" href="#large-values">Large Values</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#exchange">Exchange</a><ul>
-<li><a class="reference internal" href="#concurrent-operations-on-exchanges">Concurrent Operations on Exchanges</a></li>
-<li><a class="reference internal" href="#exchange-api">Exchange API</a></li>
+<li><a class="reference external" href="#exchange">Exchange</a><ul>
+<li><a class="reference external" href="#concurrent-operations-on-exchanges">Concurrent Operations on Exchanges</a></li>
+<li><a class="reference external" href="#exchange-api">Exchange API</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#traversing-and-querying-collections-of-data">Traversing and Querying Collections of Data</a><ul>
-<li><a class="reference internal" href="#selecting-key-values-with-a-keyfilter">Selecting key values with a KeyFilter</a></li>
+<li><a class="reference external" href="#traversing-and-querying-collections-of-data">Traversing and Querying Collections of Data</a><ul>
+<li><a class="reference external" href="#selecting-key-values-with-a-keyfilter">Selecting key values with a KeyFilter</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#persistitmap">PersistitMap</a><ul>
-<li><a class="reference internal" href="#exceptions-in-persistitmap">Exceptions in PersistitMap</a></li>
-<li><a class="reference internal" href="#applying-a-keyfilter-to-a-persistitmap-iterator">Applying a KeyFilter to a PersistitMap Iterator</a></li>
+<li><a class="reference external" href="#persistitmap">PersistitMap</a><ul>
+<li><a class="reference external" href="#exceptions-in-persistitmap">Exceptions in PersistitMap</a></li>
+<li><a class="reference external" href="#applying-a-keyfilter-to-a-persistitmap-iterator">Applying a KeyFilter to a PersistitMap Iterator</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="GettingStarted.html"
-                        title="previous chapter">Getting Started with Akiban Persistit</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="Transactions.html"
-                        title="next chapter">Transactions</a></p>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="GettingStarted.html"
+                                  title="previous chapter">Getting Started with Akiban Persistit</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="Transactions.html"
+                                  title="next chapter">Transactions</a></p>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -367,12 +361,12 @@ of a transaction must be used only within that transaction.</p>
         <li class="right" >
           <a href="GettingStarted.html" title="Getting Started with Akiban Persistit"
              >previous</a> |</li>
-        <li><a href="index.html">Persistit 3.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Akiban Technologies.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      &copy; Copyright 2013, Akiban Technologies.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
     </div>
   </body>
 </html>

@@ -125,7 +125,7 @@ Although ``HelloWorld.java`` is not very useful, it demonstrates several of the 
 Initialization and Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Before accessing any data, ``HelloWorld.java`` calls the `initialize() <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#initialize()>`_. This sets up the memory configuration for buffers and the path names of Persistit volume and journal files. Alternative methods accept configuration information from a `com.persistit.Configuration <http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html>`_ object, a ``java.util.Properties`` object, a specified properties file, or by default from the file named ``persistit.properties`` in the current working directory.
+Before accessing any data, ``HelloWorld.java`` calls the `initialize <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#initialize()>`_ method. This sets up the memory configuration for buffers and the path names of Persistit volume and journal files. Alternative methods accept configuration information from a `com.persistit.Configuration <http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html>`_ object, a ``java.util.Properties`` object, a specified properties file, or by default from the file named ``persistit.properties`` in the current working directory.
 
 In this example, ``persistit.properties`` looks like this:: 
 
@@ -158,16 +158,16 @@ The method
 
 in ``HelloWorld.java`` finds a volume named "hwdemo" and attempts to find a tree in it named "greetings". If there is no such tree, ``getExchange`` creates it.
 
-Methods `getExchange(Volume, String, boolean) <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#getExchange(com.persistit.Volume,%20java.lang.String,%20boolean)>`_ and `releaseExchange(Exchange) <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#releaseExchange(com.persistit.Exchange)>`_ maintain a pool of reusable Exchange objects designed for use by multi-threaded applications such as web applications. If a suitable exchange already exists, ``getExchange`` returns it; otherwise it constructs a new one.
+Methods `getExchange <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#getExchange(com.persistit.Volume,%20java.lang.String,%20boolean)>`_ and `releaseExchange <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#releaseExchange(com.persistit.Exchange)>`_ maintain a pool of reusable Exchange objects designed for use by multi-threaded applications such as web applications. If a suitable exchange already exists, ``getExchange`` returns it; otherwise it constructs a new one.
 
 The Exchange looks up the volume name “hwdemo” by matching it against the volumes specified in the configuration. The match is based on the simple file name of the volume after removing its final dotted suffix.  For example, the volume name “hwdemo” matches the volume specification ``${datapath}/hwdemo.v00``.
 
 Each Exchange is implicitly associated with a `com.persistit.Key <http://akiban.github.com/persistit/javadoc/com/persistit/Key.html>`_ and a `com.persistit.Value <http://akiban.github.com/persistit/javadoc/com/persistit/Value.html>`_. Typically you work with an Exchange in one of the following patterns:
 
-- Modify the Key, modify the Value and then perform a `store() <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#store()>`_ operation.
-- Modify the Key, perform a `fetch() <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#fetch()>`_ operation and then read the Value.
-- Modify the Key and then perform a `remove() <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#remove()>`_ operation.
-- Optionally modify the Key, perform a `next() <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#next()>`_, `previous() <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#previous()>`_ or `traverse(Key.Direction, boolean) <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#traverse(com.persistit.Key.Direction,%20boolean)>`_ operation, then read the resulting Key and/or Value.
+- Modify the Key, modify the Value and then perform a `store <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#store()>`_ operation.
+- Modify the Key, perform a `fetch <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#fetch()>`_ operation and then read the Value.
+- Modify the Key and then perform a `remove <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#remove()>`_ operation.
+- Optionally modify the Key, perform a `next <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#next()>`_, `previous <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#previous()>`_ or `traverse <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#traverse(com.persistit.Key.Direction,%20boolean)>`_ operation, then read the resulting Key and/or Value.
 
 These methods and their variants provide the foundation for using Persistit.
 
@@ -230,9 +230,9 @@ Finally, it is these two methods in ``HelloWorld.java`` that cause the Exchange 
 Closing Persistit
 ^^^^^^^^^^^^^^^^^
 
-Persistit creates one or more background threads that lazily write data to the Volume files and perform other maintenance activities. Be sure to invoke the `close() <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()>`_ method to allow these threads to finish their work and exit properly. The pattern illustrated in ``HelloWorld.java``, using a *try/finally* block to invoke ``close``, is strongly recommended.
+Persistit creates one or more background threads that lazily write data to the Volume files and perform other maintenance activities. Be sure to invoke the `close <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()>`_ method to allow these threads to finish their work and exit properly. The pattern illustrated in ``HelloWorld.java``, using a *try/finally* block to invoke ``close``, is strongly recommended.
 
-The `close() <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()>`_ method optionally flushes all data to disk from the buffer pool before shutting down. Specifying the ``false`` option will close Persistit more quickly will lose recent updates if they were not performed inside of transactions, or will potentially require a longer recovery process during the next startup to reapply committed transactions.
+The `close <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#close()>`_ method optionally flushes all data to disk from the buffer pool before shutting down. Specifying the ``false`` option will close Persistit more quickly will lose recent updates if they were not performed inside of transactions, or will potentially require a longer recovery process during the next startup to reapply committed transactions.
 
 Additional Topics
 -----------------
@@ -246,7 +246,9 @@ See :ref:`PersistitMap`.
 KeyFilters
 ^^^^^^^^^^
 
-A `com.persistit.KeyFilter <http://akiban.github.com/persistit/javadoc/com/persistit/KeyFilter.html>`_ can be supplied to restrict the results traversal operation in a convenient and  
+A `com.persistit.KeyFilter <http://akiban.github.com/persistit/javadoc/com/persistit/KeyFilter.html>`_ can be supplied to restrict the results returned by the `traverse <http://akiban.github.com/persistit/javadoc/com/persistit/Exchange.html#traverse(com.persistit.Key.Direction,%20boolean)>`_ methods. You can specify discrete values or ranges for values of individual key segments and apply other simple predicates.
+
+See :ref:`Basic-API`.   
 
 Transactions
 ^^^^^^^^^^^^

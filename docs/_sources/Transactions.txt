@@ -3,7 +3,7 @@
 Transactions
 =============
 
-Akiban Persistit supports transactions with multi-version concurrency control (MVCC) using a protocol called Snapshot Isolation (SI). An application calls `begin() <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#begin()>`_, `commit() <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#commit()>`_, `rollback() <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#rollback()>`_ and `end() <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#end()>`_ methods to control the current transaction scope explicitly.  A Transaction allows an application to execute multiple database operations in an atomic, consistent, isolated and durable (ACID) manner.
+Akiban Persistit supports transactions with multi-version concurrency control (MVCC) using a protocol called Snapshot Isolation (SI). An application calls `begin <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#begin()>`_, `commit <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#commit()>`_, `rollback <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#rollback()>`_ and `end <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#end()>`_ methods to control the current transaction scope explicitly.  A Transaction allows an application to execute multiple database operations in an atomic, consistent, isolated and durable (ACID) manner.
 
 Applications manage transactions through an instance of a `com.persistit.Transaction <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html>`_ object. ``Transaction`` does not represent a single transaction, but is instead a context in which a thread may perform many sequential transactions. The general pattern is that the application gets the current thread’s ``Transaction`` instance, calls its ``begin`` method, performs work, calls ``commit`` and finally ``end``.  The thread uses the same ``Transaction`` instance repeatedly. Generally each thread has one ``Transaction`` that lasts for the entire life of the thread (but see `com.persistit.Transaction <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html>`_ for a mechanism that allows a transaction to be serviced by multiple threads). 
 
@@ -48,7 +48,7 @@ This example catches `com.persistit.exception.RollbackException <http://akiban.g
 
 This example also uses a *try/finally* block to ensure every call to ``begin`` has a matching call to ``end``. This code pattern is mandatory: it is critical to correct transaction nesting behavior.
 
-One convenient way to do this is to encapsulate the logic of a transaction in an implementation of ``com.persisitit.TransactionRunnable`` interface. The `run(TransactionRunnable) <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#run(com.persistit.TransactionRunnable)>`_ method automatically provides logic to begin the transaction, execute the TransactionRunnable and commit the transaction, repeating the process until no rollback is thrown or a maximum retry count is reached. For example, the code fragment shown above can be rewritten as:
+One convenient way to do this is to encapsulate the logic of a transaction in an implementation of ``com.persisitit.TransactionRunnable`` interface. The `run <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#run(com.persistit.TransactionRunnable)>`_ method automatically provides logic to begin the transaction, execute the TransactionRunnable and commit the transaction, repeating the process until no rollback is thrown or a maximum retry count is reached. For example, the code fragment shown above can be rewritten as:
 
 .. code-block:: java
 
@@ -116,10 +116,12 @@ It is well-known that transactions executing under SI are not necessarily serial
 
 Note that many common transaction patterns, including those defined by the TPC-C benchmark, do not experience write-skew and therefore *are* serializable under SI.
 
+In the unusual case where transactions are susceptible to write skew, the Exchange#lock method offers a way for applications to create a write-write dependency explicitly. This mechanism provides an efficient mechanism for ensuring serializable behavior.
+
 Durability Options: ``CommitPolicy``
 ------------------------------------
 
-Persistit provides three policies that determine the durability of a transaction after it has executed the `commit() <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#commit()>`_ method. These are:
+Persistit provides three policies that determine the durability of a transaction after it has executed the `commit <http://akiban.github.com/persistit/javadoc/com/persistit/Transaction.html#commit()>`_ method. These are:
 
   ``HARD``
       The ``commit`` method does not return until all updates created by the transaction have been written to non-volatile storage (e.g., disk storage).
@@ -130,7 +132,7 @@ Persistit provides three policies that determine the durability of a transaction
       The ``commit`` method returns *before* the updates have been recorded on non-volatile storage. Persistit attempts to write them within 100 milliseconds, but 
       this interval is not guaranteed.
 
-You can specify a default policy in the Persistit initialization properties using the ``txnpolicy`` property or under program control using `setDefaultTransactionCommitPolicy(Transaction.CommitPolicy) <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#setDefaultTransactionCommitPolicy(com.persistit.Transaction.CommitPolicy)>`_. The default policy applies whenever the application calls the ``commit()`` method. You can override the default policy using ``commit(CommitPolicy)``.
+You can specify a default policy in the Persistit initialization properties using the ``txnpolicy`` property or under program control using `setDefaultTransactionCommitPolicy <http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#setDefaultTransactionCommitPolicy(com.persistit.Transaction.CommitPolicy)>`_. The default policy applies whenever the application calls the ``commit()`` method. You can override the default policy using ``commit(CommitPolicy)``.
 
 HARD and GROUP ensure each transaction is written durably to non-volatile storage before the ``commit`` method returns. The difference is that GROUP can improve throughput in multi-threaded applications because the average number of I/O operations needed to commit *N* transactions can be smaller than *N*. However, for one or a small number of concurrent threads, GROUP reduces throughput because it works by introducing a delay to allow other concurrent transactions to commit within a single I/O operation.
 
@@ -182,7 +184,7 @@ Accumulator instances are associated with a `com.persistit.Tree <http://akiban.g
 
 The value 17 is simply an arbitrary index number between 0 and 63, inclusive. The application is responsible for allocating and managing accumulator indexes.
 
-The snapshot value of an accumulator obtained through `getSnapshotValue(Transaction) <http://akiban.github.com/persistit/javadoc/com/persistit/Accumulator.html#getSnapshotValue(com.persistit.Transaction)>`_ is the value computed from all updates contributed by transactions that had committed at the time the current transaction started, plus the transaction’s own as-yet uncommitted updates. In other words, the snapshot value of the accumulator is consistent with the snapshot view of all other data visible within the transaction.
+The snapshot value of an accumulator obtained through `getSnapshotValue <http://akiban.github.com/persistit/javadoc/com/persistit/Accumulator.html#getSnapshotValue(com.persistit.Transaction)>`_ is the value computed from all updates contributed by transactions that had committed at the time the current transaction started, plus the transaction’s own as-yet uncommitted updates. In other words, the snapshot value of the accumulator is consistent with the snapshot view of all other data visible within the transaction.
 
 An accumulator has two ways of accessing its accumulated value:
 
