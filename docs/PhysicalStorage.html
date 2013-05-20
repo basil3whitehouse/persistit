@@ -1,25 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Physical B+Tree Representation &mdash; Persistit v3.2.7 documentation</title>
+    <title>Physical B+Tree Representation &mdash; Persistit 3.3.0 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
-        VERSION:     '3.2.7',
-        COLLAPSE_MODINDEX: false,
+        URL_ROOT:    './',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Persistit v3.2.7 documentation" href="index.html" />
+    <link rel="top" title="Persistit 3.3.0 documentation" href="index.html" />
     <link rel="next" title="Configuration" href="Configuration.html" />
     <link rel="prev" title="Transactions" href="Transactions.html" /> 
   </head>
@@ -33,7 +37,7 @@
         <li class="right" >
           <a href="Transactions.html" title="Transactions"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit 3.3.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -74,11 +78,11 @@
 <li>Copies the appropriate volume and journal files</li>
 <li>Disables <tt class="docutils literal"><span class="pre">appendOnly</span></tt> mode to allow JOURNAL_COPIER to continue.</li>
 </ul>
-<p>For more details on the journal, checkpoints and transactions, see <a class="reference internal" href="#recovery"><em>Recovery</em></a>. For more information on concurrent backup and other management tasks, see <a class="reference external" href="Management.html#management"><em>Management</em></a>.</p>
+<p>For more details on the journal, checkpoints and transactions, see <a class="reference internal" href="#recovery"><em>Recovery</em></a>. For more information on concurrent backup and other management tasks, see <a class="reference internal" href="Management.html#management"><em>Management</em></a>.</p>
 </div>
 <div class="section" id="pages-and-volumes">
 <h2>Pages and Volumes<a class="headerlink" href="#pages-and-volumes" title="Permalink to this headline">¶</a></h2>
-<p>Persistit ultimately stores its data in one or more Volume files. Persistit manages volume files internally in sections called pages. Every page within one volume has the same size. The page size is configurable and may be 1,024, 2,048, 4,096, 8,192, or 16,384 (recommended) bytes long. Once the page size for a volume has been established, it cannot be changed. See <a class="reference external" href="Configuration.html#configuration"><em>Configuration</em></a> for details of how to assign the page size for a new volume.</p>
+<p>Persistit ultimately stores its data in one or more Volume files. Persistit manages volume files internally in sections called pages. Every page within one volume has the same size. The page size is configurable and may be 1,024, 2,048, 4,096, 8,192, or 16,384 (recommended) bytes long. Once the page size for a volume has been established, it cannot be changed. See <a class="reference internal" href="Configuration.html#configuration"><em>Configuration</em></a> for details of how to assign the page size for a new volume.</p>
 <div class="section" id="directory-tree">
 <h3>Directory Tree<a class="headerlink" href="#directory-tree" title="Permalink to this headline">¶</a></h3>
 <p>Within a volume there can be an unlimited number of B+Trees. (B+Trees are also called simply “trees” in this document.) A tree consists of a set of pages including a <em>root page</em>, <em>index pages</em> and <em>data pages</em>. The root page can be data page if the tree is trivial and contains only small number of records. Usually the root page is an index page which contains references to other index pages which in turn may refer to data pages.</p>
@@ -86,7 +90,7 @@
 </div>
 <div class="section" id="data-pages">
 <h3>Data Pages<a class="headerlink" href="#data-pages" title="Permalink to this headline">¶</a></h3>
-<p>A data page contains a representation of one or more variable-length key/value pairs. The number of key/value pairs depends on the page size, and the sizes of the serialized keys and values. The first key in each data page is stored in its entirety, while subsequent keys are stored with <em>prefix compression</em> to reduce storage footprint and accelerate searches. Therefore the storage sizes of the second and subsequent keys in a data page depend on how many of the leading bytes of their serialized form match their predecessors. (See <a class="reference external" href="BasicAPI.html#key"><em>Key</em></a> and <a class="reference external" href="BasicAPI.html#value"><em>Value</em></a> for information on how Persistit encodes logical Java values into the byte arrays stored in a data page.)</p>
+<p>A data page contains a representation of one or more variable-length key/value pairs. The number of key/value pairs depends on the page size, and the sizes of the serialized keys and values. The first key in each data page is stored in its entirety, while subsequent keys are stored with <em>prefix compression</em> to reduce storage footprint and accelerate searches. Therefore the storage sizes of the second and subsequent keys in a data page depend on how many of the leading bytes of their serialized form match their predecessors. (See <a class="reference internal" href="BasicAPI.html#key"><em>Key</em></a> and <a class="reference internal" href="BasicAPI.html#value"><em>Value</em></a> for information on how Persistit encodes logical Java values into the byte arrays stored in a data page.)</p>
 </div>
 <div class="section" id="index-pages">
 <h3>Index Pages<a class="headerlink" href="#index-pages" title="Permalink to this headline">¶</a></h3>
@@ -101,7 +105,7 @@
 <ul class="simple">
 <li>Restores all B+Trees to an internally consistent state with a known timestamp.</li>
 <li>Replays all transaction that committed after that timestamp.</li>
-<li>Prunes multi-version values belonging to certain aborted transactions (see <a class="reference external" href="Transactions.html#pruning"><em>Pruning</em></a>).</li>
+<li>Prunes multi-version values belonging to certain aborted transactions (see <a class="reference internal" href="Transactions.html#pruning"><em>Pruning</em></a>).</li>
 </ul>
 <p>To accomplish this, Persistit writes all updates first to the journal. Persistit also periodically writes <em>checkpoint</em> records to the journal. During recovery, Persistit finds the last valid checkpoint written before shutdown or crash, restores B+Trees to state consistent with that checkpoint, and then replays transactions that committed after the checkpoint.</p>
 <p>Recovery depends on the availability of the volume and journal files as they existed prior to abrupt termination. If these are modified or destroyed outside of Persistit, successful recovery is unlikely.</p>
@@ -113,7 +117,7 @@
 <p>Then Persistit locates and reapplies all transaction records in the journal for transactions that committed after the last valid checkpoint timestamp. These transactions are reapplied to the database, with the result that:</p>
 <ul class="simple">
 <li>The B+Tree index and data structures are intact. All store, fetch, remove and traverse operations will complete successfully.</li>
-<li>All committed transactions are present in the recovered database.  (See <a class="reference external" href="Transactions.html#transactions"><em>Transactions</em></a> for durability determined by <tt class="docutils literal"><span class="pre">CommitPolicy</span></tt>.)</li>
+<li>All committed transactions are present in the recovered database.  (See <a class="reference internal" href="Transactions.html#transactions"><em>Transactions</em></a> for durability determined by <tt class="docutils literal"><span class="pre">CommitPolicy</span></tt>.)</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -125,7 +129,7 @@
 <h3>Flush/Force/Checkpoint<a class="headerlink" href="#flush-force-checkpoint" title="Permalink to this headline">¶</a></h3>
 <p>An application may require certainty at various points that all pending updates have been fully written to disk. The <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html">com.persistit.Persistit</a> class provides three methods to ensure that updates have been written:</p>
 <blockquote>
-<dl class="docutils">
+<div><dl class="docutils">
 <dt><a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#flush()">flush</a></dt>
 <dd>causes Persistit to write all pending updates to the journal. Upon successful completion of flush any pages that needed writing prior to the call to flush are
 guaranteed to have been written to the journal or their respective volume files.</dd>
@@ -135,21 +139,21 @@ the underlying <tt class="docutils literal"><span class="pre">java.io.Filechanne
 <dt><a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#checkpoint()">checkpoint</a></dt>
 <dd>causes Persistit to allocate a new checkpoint timestamp and then wait for all updates that happened before that timestamp to be committed to disk.</dd>
 </dl>
-</blockquote>
-<p>However, typical applications, especially those using <a class="reference external" href="Transactions.html#transactions"><em>Transactions</em></a>, do not need to invoke these methods. Once a Transaction is durable, so are all other transactions that occurred at timestamps earlier than the transaction’s commit timestamp and no other method calls are required.</p>
+</div></blockquote>
+<p>However, typical applications, especially those using <a class="reference internal" href="Transactions.html#transactions"><em>Transactions</em></a>, do not need to invoke these methods. Once a Transaction is durable, so are all other transactions that occurred at timestamps earlier than the transaction’s commit timestamp and no other method calls are required.</p>
 </div>
 </div>
 <div class="section" id="the-buffer-pool">
 <h2>The Buffer Pool<a class="headerlink" href="#the-buffer-pool" title="Permalink to this headline">¶</a></h2>
 <p>Persistit maintains a cache of page copies in memory called the <em>buffer pool</em>. The buffer pool is a critical resource in reducing disk I/O and providing good run-time performance. After performing a relatively expensive disk operation to read a copy of a page into the buffer pool, Persistit retains that copy to allow potentially many fetch and update operations to be performed against keys and values stored in that page.</p>
 <p>Persistit optimizes update operations by writing updated database pages lazily, generally a few seconds to minutes after the update has been performed on the in-memory copy of the page cached in the buffer pool. By writing lazily, Persistit allows many update operations to be completed on each page before incurring a relatively expensive disk I/O operation to write the updated version of the page to the Volume.</p>
-<p>In Persistit the buffer pool is a collection of buffers allocated from the heap for the duration of Persistit’s operation. The buffers are allocated by the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#initialize()">initialize</a> method and are released when the application invokes close. Because buffers are allocated for the life of the Persistit instance, they impose no garbage collection overhead. (However, especially when using large buffer pool allocation in a JVM with a large heap, there are some special memory configuration issues to consider.  See <a class="reference external" href="Configuration.html#configuration"><em>Configuration</em></a> for details.)</p>
+<p>In Persistit the buffer pool is a collection of buffers allocated from the heap for the duration of Persistit’s operation. The buffers are allocated by the <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Persistit.html#initialize()">initialize</a> method and are released when the application invokes close. Because buffers are allocated for the life of the Persistit instance, they impose no garbage collection overhead. (However, especially when using large buffer pool allocation in a JVM with a large heap, there are some special memory configuration issues to consider.  See <a class="reference internal" href="Configuration.html#configuration"><em>Configuration</em></a> for details.)</p>
 <p>Persistit allocates buffers from the buffer pool in approximately  least-recently-used (LRU) order. Most applications exhibit behavior in which data, having been accessed once, is read or updated several more times before the application moves to a different area of the database (locality of reference). LRU is an allocation strategy the yields reasonably good overall throughput by maintaining pages that are likely to be used again in the buffer pool in preference to pages that have not been used for a relatively long time.</p>
 <p>Generally, allocating more buffers in the buffer pool increases the likelihood that a page will be found in the pool rather than having to be reloaded from disk. Since disk I/O is relatively expensive, this means that enlarging the buffer pool is a good strategy for reducing disk I/O and thereby increasing throughput. Persistit is designed to manage extremely large buffer pools very efficiently, so if memory is available, it is generally a good strategy to maximum buffer pool size.</p>
 </div>
 <div class="section" id="tools">
 <h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
-<p>The command-line interface (see <a class="reference external" href="Management.html#cli"><em>The Command-Line Interface</em></a>) includes tools you can use to examine pages in volumes and records in the journal. Two of these include the <tt class="docutils literal"><span class="pre">jview</span></tt> and <tt class="docutils literal"><span class="pre">pview</span></tt> tasks. The <tt class="docutils literal"><span class="pre">jview</span></tt> command displays journal records selected within an address range, by type, by page address, and using other selection criteria in a readable form.  The <tt class="docutils literal"><span class="pre">pview</span></tt> command displays the contents of pages selected by page address or key from a volume, or by journal address from the journal.</p>
+<p>The command-line interface (see <a class="reference internal" href="Management.html#cli"><em>The Command-Line Interface</em></a>) includes tools you can use to examine pages in volumes and records in the journal. Two of these include the <tt class="docutils literal"><span class="pre">jview</span></tt> and <tt class="docutils literal"><span class="pre">pview</span></tt> tasks. The <tt class="docutils literal"><span class="pre">jview</span></tt> command displays journal records selected within an address range, by type, by page address, and using other selection criteria in a readable form.  The <tt class="docutils literal"><span class="pre">pview</span></tt> command displays the contents of pages selected by page address or key from a volume, or by journal address from the journal.</p>
 <p class="rubric">Footnotes</p>
 <table class="docutils footnote" frame="void" id="f1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -166,47 +170,47 @@ the underlying <tt class="docutils literal"><span class="pre">java.io.Filechanne
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Physical B+Tree Representation</a><ul>
-<li><a class="reference external" href="#files">Files</a></li>
-<li><a class="reference external" href="#the-journal">The Journal</a></li>
-<li><a class="reference external" href="#pages-and-volumes">Pages and Volumes</a><ul>
-<li><a class="reference external" href="#directory-tree">Directory Tree</a></li>
-<li><a class="reference external" href="#data-pages">Data Pages</a></li>
-<li><a class="reference external" href="#index-pages">Index Pages</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Physical B+Tree Representation</a><ul>
+<li><a class="reference internal" href="#files">Files</a></li>
+<li><a class="reference internal" href="#the-journal">The Journal</a></li>
+<li><a class="reference internal" href="#pages-and-volumes">Pages and Volumes</a><ul>
+<li><a class="reference internal" href="#directory-tree">Directory Tree</a></li>
+<li><a class="reference internal" href="#data-pages">Data Pages</a></li>
+<li><a class="reference internal" href="#index-pages">Index Pages</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#recovery">Recovery</a><ul>
-<li><a class="reference external" href="#timestamps-and-checkpoints">Timestamps and Checkpoints</a></li>
-<li><a class="reference external" href="#flush-force-checkpoint">Flush/Force/Checkpoint</a></li>
+<li><a class="reference internal" href="#recovery">Recovery</a><ul>
+<li><a class="reference internal" href="#timestamps-and-checkpoints">Timestamps and Checkpoints</a></li>
+<li><a class="reference internal" href="#flush-force-checkpoint">Flush/Force/Checkpoint</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#the-buffer-pool">The Buffer Pool</a></li>
-<li><a class="reference external" href="#tools">Tools</a></li>
+<li><a class="reference internal" href="#the-buffer-pool">The Buffer Pool</a></li>
+<li><a class="reference internal" href="#tools">Tools</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="Transactions.html"
-                                  title="previous chapter">Transactions</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="Configuration.html"
-                                  title="next chapter">Configuration</a></p>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Transactions.html"
+                        title="previous chapter">Transactions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Configuration.html"
+                        title="next chapter">Configuration</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -220,12 +224,12 @@ the underlying <tt class="docutils literal"><span class="pre">java.io.Filechanne
         <li class="right" >
           <a href="Transactions.html" title="Transactions"
              >previous</a> |</li>
-        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit 3.3.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2013, Akiban Technologies.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+        &copy; Copyright 2013, Akiban Technologies.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

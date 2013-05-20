@@ -1,25 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Security Notes &mdash; Persistit v3.2.7 documentation</title>
+    <title>Security Notes &mdash; Persistit 3.3.0 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
-        VERSION:     '3.2.7',
-        COLLAPSE_MODINDEX: false,
+        URL_ROOT:    './',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Persistit v3.2.7 documentation" href="index.html" />
+    <link rel="top" title="Persistit 3.3.0 documentation" href="index.html" />
     <link rel="next" title="Serializing Object Values" href="Serialization.html" />
     <link rel="prev" title="Management" href="Management.html" /> 
   </head>
@@ -33,7 +37,7 @@
         <li class="right" >
           <a href="Management.html" title="Management"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit 3.3.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -51,7 +55,7 @@
 <li>access by unauthorized code to the API exposed by the Persistit library</li>
 <li>the port opened and exposed by Persistit when either the <tt class="docutils literal"><span class="pre">com.persistit.rmiport</span></tt> or <tt class="docutils literal"><span class="pre">com.persistit.rmihost</span></tt> property is set. If you are using Persistit&#8217;s remote administration feature, be sure to block unauthorized access to the RMI port.</li>
 <li>access to MXBeans via JMX</li>
-<li>the CLI server (see <a class="reference external" href="Management.html#cliserver"><em>Executing a Task Using the Built-In cliserver</em></a>) if instantiated</li>
+<li>the CLI server (see <a class="reference internal" href="Management.html#cliserver"><em>Executing a Task Using the Built-In cliserver</em></a>) if instantiated</li>
 </ul>
 <p>In addition to these general deployment considerations, Persistit requires certain permissions in an environment controlled by a security manager.</p>
 <p>Java programs run from the command line typically do not install a security manager, and therefore implicitly grant all permissions. However, when Persistit is used within an Applet, or within any framework that installs a security manager, it is important to understand what permissions are required.</p>
@@ -123,37 +127,37 @@ java.io.SerializablePermission("enableSubclassImplementation")</pre>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Security Notes</a><ul>
-<li><a class="reference external" href="#security-domains">Security Domains</a></li>
-<li><a class="reference external" href="#permissions-required-for-defaultvaluecoder">Permissions Required for DefaultValueCoder</a></li>
-<li><a class="reference external" href="#permission-required-for-reading-system-properties">Permission Required for Reading System Properties</a></li>
-<li><a class="reference external" href="#permissions-required-for-file-and-socket-i-o">Permissions Required for File and Socket I/O</a></li>
-<li><a class="reference external" href="#deploying-persistit-as-an-installed-optional-package">Deploying Persistit as an Installed Optional Package</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Security Notes</a><ul>
+<li><a class="reference internal" href="#security-domains">Security Domains</a></li>
+<li><a class="reference internal" href="#permissions-required-for-defaultvaluecoder">Permissions Required for DefaultValueCoder</a></li>
+<li><a class="reference internal" href="#permission-required-for-reading-system-properties">Permission Required for Reading System Properties</a></li>
+<li><a class="reference internal" href="#permissions-required-for-file-and-socket-i-o">Permissions Required for File and Socket I/O</a></li>
+<li><a class="reference internal" href="#deploying-persistit-as-an-installed-optional-package">Deploying Persistit as an Installed Optional Package</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="Management.html"
-                                  title="previous chapter">Management</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="Serialization.html"
-                                  title="next chapter">Serializing Object Values</a></p>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Management.html"
+                        title="previous chapter">Management</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Serialization.html"
+                        title="next chapter">Serializing Object Values</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -167,12 +171,12 @@ java.io.SerializablePermission("enableSubclassImplementation")</pre>
         <li class="right" >
           <a href="Management.html" title="Management"
              >previous</a> |</li>
-        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit 3.3.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2013, Akiban Technologies.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+        &copy; Copyright 2013, Akiban Technologies.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

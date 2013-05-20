@@ -1,25 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuration &mdash; Persistit v3.2.7 documentation</title>
+    <title>Configuration &mdash; Persistit 3.3.0 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
-        VERSION:     '3.2.7',
-        COLLAPSE_MODINDEX: false,
+        URL_ROOT:    './',
+        VERSION:     '3.3.0',
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Persistit v3.2.7 documentation" href="index.html" />
+    <link rel="top" title="Persistit 3.3.0 documentation" href="index.html" />
     <link rel="next" title="Management" href="Management.html" />
     <link rel="prev" title="Physical B+Tree Representation" href="PhysicalStorage.html" /> 
   </head>
@@ -33,7 +37,7 @@
         <li class="right" >
           <a href="PhysicalStorage.html" title="Physical B+Tree Representation"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit 3.3.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -86,7 +90,7 @@
 <p>The number of buffers, and therefore the heap memory consumed, is determined during initialization by the available heap memory and configuration parameters. The heap memory size is obtained from the platform MemoryMXBean which in turn supplies the value given by the <tt class="docutils literal"><span class="pre">-Xmx</span></tt> JVM property. Configuration parameters are specified by a collection of five <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.BufferPoolConfiguration.html">com.persistit.Configuration.BufferPoolConfiguration</a> objects, one for each of the possible buffer sizes 1,024, 2,048, 4,096, 8,192 and 16,384 bytes. The method <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html#getBufferPoolMap()">getBufferPoolMap</a> gets the <tt class="docutils literal"><span class="pre">BufferPoolConfiguration</span></tt> for a specified buffer size.</p>
 <p>A <tt class="docutils literal"><span class="pre">BufferPoolConfiguration</span></tt> contains the following attributes:</p>
 <blockquote>
-<dl class="docutils">
+<div><dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">minimumCount</span></tt></dt>
 <dd>lower bound on the number of buffers. (Default is zero.)</dd>
 <dt><tt class="docutils literal"><span class="pre">maximumCount</span></tt></dt>
@@ -100,7 +104,7 @@
 <dt><tt class="docutils literal"><span class="pre">fraction</span></tt></dt>
 <dd>floating point value between 0.0f and 1.0f indicating how much of available memory too allocate.  (Default is 1.0f.)</dd>
 </dl>
-</blockquote>
+</div></blockquote>
 <p>Persistit uses the following algorithm to determine the number of buffers to allocate for each buffer size:</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="n">memoryToUse</span> <span class="o">=</span> <span class="n">fraction</span> <span class="o">*</span> <span class="o">(</span><span class="n">maxHeap</span> <span class="o">-</span> <span class="n">reservedMemory</span><span class="o">)</span>
 <span class="n">memoryToUse</span> <span class="o">=</span> <span class="n">min</span><span class="o">(</span><span class="n">memoryToUse</span><span class="o">,</span> <span class="n">maximumMemory</span><span class="o">)</span>
@@ -176,7 +180,7 @@ to fit in the heap’s tenured generation. This issue becomes especially signifi
 </div>
 <div class="section" id="configuring-the-journal-path">
 <h2>Configuring the Journal Path<a class="headerlink" href="#configuring-the-journal-path" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="PhysicalStorage.html#journal"><em>The Journal</em></a> consists of a series of sequentially numbered files located in directory specified by the configuration parameter <tt class="docutils literal"><span class="pre">journalpath</span></tt>. The application can set this property by calling <tt class="docutils literal"><span class="pre">com.persistit.Configuration#setJournalPath</span></tt> prior to initializing Persistit or through the property:</p>
+<p>The <a class="reference internal" href="PhysicalStorage.html#journal"><em>The Journal</em></a> consists of a series of sequentially numbered files located in directory specified by the configuration parameter <tt class="docutils literal"><span class="pre">journalpath</span></tt>. The application can set this property by calling <tt class="docutils literal"><span class="pre">com.persistit.Configuration#setJournalPath</span></tt> prior to initializing Persistit or through the property:</p>
 <div class="highlight-python"><pre>journalpath=/ssd/data/my_app_journal</pre>
 </div>
 <p>The value specified can be either a</p>
@@ -206,7 +210,7 @@ to fit in the heap’s tenured generation. This issue becomes especially signifi
 <h2>Other Configuration Parameters<a class="headerlink" href="#other-configuration-parameters" title="Permalink to this headline">¶</a></h2>
 <p>The following additional properties are defined for Persistit. Other properties may also reside in the Properties object or its backing file; Persistit simply ignores any property not listed here.</p>
 <blockquote>
-<dl class="docutils">
+<div><dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">journalsize</span></tt>: (<a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html#setJournalSize(long)">setJournalSize</a>)</dt>
 <dd>Journal file block size. Default is 1,000,000,000 bytes. A new Persistit rolls over to a new journal file when this
 size is reached. Generally there is no reason to adjust this setting.</dd>
@@ -229,7 +233,7 @@ properties are mutually exclusive.</dd>
 <dd>Specifies whether Persistit registers MXBeans with the platform MBean server. Set this value to <tt class="docutils literal"><span class="pre">true</span></tt> to enable
 access from <tt class="docutils literal"><span class="pre">jconsole</span></tt> and other management tools.</dd>
 <dt><tt class="docutils literal"><span class="pre">serialOverride</span></tt>, <tt class="docutils literal"><span class="pre">constructorOverride</span></tt>: (<a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html#setSerialOverride(java.lang.String)">setSerialOverride</a> <a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html#setConstructorOverride(boolean)">setConstructorOverride</a>)</dt>
-<dd>Control aspects of object serialization. See <a class="reference external" href="Serialization.html#serialization"><em>Serializing Object Values</em></a>.</dd>
+<dd>Control aspects of object serialization. See <a class="reference internal" href="Serialization.html#serialization"><em>Serializing Object Values</em></a>.</dd>
 <dt><tt class="docutils literal"><span class="pre">showgui</span></tt>: (<a class="reference external" href="http://akiban.github.com/persistit/javadoc/com/persistit/Configuration.html#setShowGUI(boolean)">setShowGUI</a>), True or False (default).</dt>
 <dd>If true, Persistit attempts to create and display an instance of the AdminUI utility panel within the current JVM.
 Alternatively, AdminUI uses RMI and can be launched and run remotely if <tt class="docutils literal"><span class="pre">rmiport</span></tt> or <tt class="docutils literal"><span class="pre">rmihost</span></tt> has been
@@ -248,7 +252,7 @@ by preloading pages that were present in the buffer pool when Persistit last shu
 Persistit instance to begin servicing a workload similar to what it had previously been handling without incurring the
 cost of many random disk reads to load pages.</dd>
 </dl>
-</blockquote>
+</div></blockquote>
 <p>For all integer-valued properties, the suffix “K” may be used to represent kilo, “M” for mega, “G” for giga and “T” for tera. For example, “2M” represents the value 2,097,152.</p>
 </div>
 <div class="section" id="a-configuration-example">
@@ -292,44 +296,44 @@ journalpath = /ssd/persistit_journal</pre>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Configuration</a><ul>
-<li><a class="reference external" href="#configuring-the-buffer-pool">Configuring the Buffer Pool</a></li>
-<li><a class="reference external" href="#heap-tuning">Heap Tuning</a></li>
-<li><a class="reference external" href="#multiple-buffer-pools">Multiple Buffer Pools</a></li>
-<li><a class="reference external" href="#configuring-volumes">Configuring Volumes</a></li>
-<li><a class="reference external" href="#system-volume">System Volume</a></li>
-<li><a class="reference external" href="#configuring-the-journal-path">Configuring the Journal Path</a></li>
-<li><a class="reference external" href="#recommendations-for-physical-media">Recommendations for Physical Media</a></li>
-<li><a class="reference external" href="#buffer-pool-preload">Buffer Pool Preload</a></li>
-<li><a class="reference external" href="#other-configuration-parameters">Other Configuration Parameters</a></li>
-<li><a class="reference external" href="#a-configuration-example">A Configuration Example</a></li>
-<li><a class="reference external" href="#property-value-substitution">Property Value Substitution</a></li>
-<li><a class="reference external" href="#incorporating-java-system-properties">Incorporating Java System Properties</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuration</a><ul>
+<li><a class="reference internal" href="#configuring-the-buffer-pool">Configuring the Buffer Pool</a></li>
+<li><a class="reference internal" href="#heap-tuning">Heap Tuning</a></li>
+<li><a class="reference internal" href="#multiple-buffer-pools">Multiple Buffer Pools</a></li>
+<li><a class="reference internal" href="#configuring-volumes">Configuring Volumes</a></li>
+<li><a class="reference internal" href="#system-volume">System Volume</a></li>
+<li><a class="reference internal" href="#configuring-the-journal-path">Configuring the Journal Path</a></li>
+<li><a class="reference internal" href="#recommendations-for-physical-media">Recommendations for Physical Media</a></li>
+<li><a class="reference internal" href="#buffer-pool-preload">Buffer Pool Preload</a></li>
+<li><a class="reference internal" href="#other-configuration-parameters">Other Configuration Parameters</a></li>
+<li><a class="reference internal" href="#a-configuration-example">A Configuration Example</a></li>
+<li><a class="reference internal" href="#property-value-substitution">Property Value Substitution</a></li>
+<li><a class="reference internal" href="#incorporating-java-system-properties">Incorporating Java System Properties</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="PhysicalStorage.html"
-                                  title="previous chapter">Physical B+Tree Representation</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="Management.html"
-                                  title="next chapter">Management</a></p>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="PhysicalStorage.html"
+                        title="previous chapter">Physical B+Tree Representation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Management.html"
+                        title="next chapter">Management</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -343,12 +347,12 @@ journalpath = /ssd/persistit_journal</pre>
         <li class="right" >
           <a href="PhysicalStorage.html" title="Physical B+Tree Representation"
              >previous</a> |</li>
-        <li><a href="index.html">Persistit v3.2.7 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Persistit 3.3.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2013, Akiban Technologies.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+        &copy; Copyright 2013, Akiban Technologies.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

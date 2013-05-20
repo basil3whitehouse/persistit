@@ -184,7 +184,7 @@ Accumulator instances are associated with a `com.persistit.Tree <http://akiban.g
 
 The value 17 is simply an arbitrary index number between 0 and 63, inclusive. The application is responsible for allocating and managing accumulator indexes.
 
-The snapshot value of an accumulator obtained through `getSnapshotValue <http://akiban.github.com/persistit/javadoc/com/persistit/Accumulator.html#getSnapshotValue(com.persistit.Transaction)>`_ is the value computed from all updates contributed by transactions that had committed at the time the current transaction started, plus the transaction’s own as-yet uncommitted updates. In other words, the snapshot value of the accumulator is consistent with the snapshot view of all other data visible within the transaction.
+The snapshot value of an accumulator obtained through `getSnapshotValue <http://akiban.github.com/persistit/javadoc/com/persistit/Accumulator.html#getSnapshotValue()>`_ is the value computed from all updates contributed by transactions that had committed at the time the current transaction started, plus the transaction’s own as-yet uncommitted updates. In other words, the snapshot value of the accumulator is consistent with the snapshot view of all other data visible within the transaction.
 
 An accumulator has two ways of accessing its accumulated value:
 
